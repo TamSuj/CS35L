@@ -31,6 +31,11 @@ XXX
 
 ## How to run
 
-
+```
+git clone https://github.com/TamSuj/CS35L.git
+cd app
+npm install
+npm run dev
+```
 ---  
 Documentation: [Optional]
