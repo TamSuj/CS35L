@@ -1,3 +1,5 @@
+import { FaPen } from "react-icons/fa";
+
 function Home() {
     return (
         <div className="min-h-screen text-center bg-gray-100">

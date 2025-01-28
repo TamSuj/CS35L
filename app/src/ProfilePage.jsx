@@ -1,9 +1,16 @@
 import React, {useState} from "react"
 import headshot from './assets/notion-face.png'
+import { FaPen } from "react-icons/fa";
+
+
+
 
 const ProfilePage = () => {
     const [follower, setFollower] = useState(0)
+    const name = "Rachel Kim"
+    function handleEdit() {
 
+    }
     return (
         <div className="bg-gray-100 min-h-screen">
             <div className="p-1"></div>
@@ -13,7 +20,8 @@ const ProfilePage = () => {
                     <img className="w-24 h-24 rounded-full " src={headshot} alt="Profile"/>
                     <div className="flex-1">
                         <div className="flex mb-2">
-                            <h2 className="text-2xl font-semibold text-gray-800">Sarah Parker</h2>
+                            <h2 className="text-2xl font-semibold text-gray-800">{name}</h2>
+                            <button className="pl-2" onClick={handleEdit}><FaPen/></button>
                             <button className="bg-gray-700 text-white text-md px-3 py-1 ml-3 rounded-full"
                                     onClick={() => setFollower((follower) => follower + 1)}>+ Follow
                             </button>
