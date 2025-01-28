@@ -12,7 +12,12 @@ const ProfilePage = () => {
                     {/*<div className="w-20 h-20 bg-gray-300 rounded-full flex-shrink-0"></div>*/}
                     <img className="w-24 h-24 rounded-full " src={headshot} alt="Profile"/>
                     <div className="flex-1">
-                        <h2 className="text-2xl font-semibold text-gray-800">Sarah Parker</h2>
+                        <div className="flex mb-2">
+                            <h2 className="text-2xl font-semibold text-gray-800">Sarah Parker</h2>
+                            <button className="bg-gray-700 text-white text-md px-3 py-1 ml-3 rounded-full"
+                                    onClick={() => setFollower((follower) => follower + 1)}>+ Follow
+                            </button>
+                        </div>
                         <p className="text-gray-600">Computer Science Student @ UCLA</p>
                         <p className="text-gray-600">Specializing in AI/ML + Full Stack Development</p>
                         <div className="flex space-x-2 mt-2">
@@ -24,9 +29,7 @@ const ProfilePage = () => {
                             <span
                                 className="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full">Data Structures</span>
                         </div>
-                        <div>
-                            <button className="bg-gray-700 text-white text-md px-3 py-1 mt-5 rounded-full" onClick={() => setFollower((follower) => follower + 1)}>+ Follow</button>
-                        </div>
+
                     </div>
                     <div className="text-right">
                         <p className="text-gray-700"><strong>245</strong> Notes</p>
