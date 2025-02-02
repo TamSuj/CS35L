@@ -1,7 +1,6 @@
 function Home() {
     return (
-        <div className="min-h-screen text-center bg-gray-100">
-            <div className="bg-gray-600 p-7"></div>
+        <div className="min-h-screen text-center">
             <h1 className="text-4xl pt-40 font-semibold text-gray-800">
                 This is the home page for CS 35L project.
             </h1>
