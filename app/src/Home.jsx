@@ -1,4 +1,5 @@
 import pic from "./assets/group.png";
+import SearchBar from "./searchBar.jsx";
 function Home() {
     return (
         <div className="min-h-screen text-center">
@@ -10,10 +11,12 @@ function Home() {
                 <h1 className="text-4xl pt-10 font-semibold text-gray-800">
                     No More Gatekeeping – Study Notes for Everyone.
                 </h1>
-                <p className="pt-10">A community-driven platform where students share, discover, and learn together.</p>
+                <p className="pt-5">A community-driven platform where students share, discover, and learn together.</p>
             </div>
 
-            <button className="mt-14 bg-gray-600 text-white p-2 pl-3 pr-3 rounded-full hover:bg-gray-800">Get started</button>
+            <button className="mt-10 bg-gray-600 text-white p-2 pl-3 pr-3 rounded-full hover:bg-gray-800">
+                Get started
+            </button>
 
 
         </div>
