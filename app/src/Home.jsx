@@ -1,9 +1,20 @@
+import pic from "./assets/group.png";
 function Home() {
     return (
         <div className="min-h-screen text-center">
-            <h1 className="text-4xl pt-40 font-semibold text-gray-800">
-                This is the home page for CS 35L project.
-            </h1>
+            <div className="container max-w-screen-sm mx-auto mt-16">
+                <img className="mx-auto" src={pic} alt="A girl chilling"/>
+            </div>
+
+            <div className="ml-6 mr-6">
+                <h1 className="text-4xl pt-10 font-semibold text-gray-800">
+                    No More Gatekeeping – Study Notes for Everyone.
+                </h1>
+                <p className="pt-10">A community-driven platform where students share, discover, and learn together.</p>
+            </div>
+
+            <button className="mt-14 bg-gray-600 text-white p-2 pl-3 pr-3 rounded-full hover:bg-gray-800">Get started</button>
+
 
         </div>
     );
