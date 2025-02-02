@@ -1,22 +1,26 @@
-# Project Name
+# Studygram
 
 ## Purpose
-[Briefly describe the purpose of your app. Explain the problem it solves or the value it provides to users.]
+Web app & online community for students to share study resources, tips, and connect with others.
 
 ## Overview
 ### Architecture and Technologies
 - **Frontend:** React
-- **Backend:** Node.js
-- **Database:** [MongoDB???]
-- **Other:** [Firebase, AWS, Docker]
+- **Backend:** Node.js, Express
+- **Database:** MongoDB
+- **Other:** Tailwind CSS
 
 ## Features
-- [Feature 1: XXXX]
-- [Feature 2: XXXX]
-- [Feature 3: XXXX]
+- Upload and share notes
+- Customizable profile
+- Comment on posts
 
 ## Individual Contribution
-XXX
+- Sonal Aggarwal
+- Tammy Sujaritchai 
+- Megan Luu
+- Felicia Chen 
+- Kento Goodman
 
 ## Challenges
 XXX

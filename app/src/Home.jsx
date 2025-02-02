@@ -1,19 +1,24 @@
-import { FaPen } from "react-icons/fa";
-
+import pic from "./assets/group.png";
+import SearchBar from "./searchBar.jsx";
 function Home() {
     return (
-        <div className="min-h-screen text-center bg-gray-100">
-            <div className="bg-gray-600 p-7"></div>
-            <h1 className="text-4xl pt-40 font-semibold text-gray-800">
-                This is the home page for CS 35L project.
-            </h1>
-            <div className="mt-10">
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    className="w-1/3 p-3 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
-                />
+        <div className="min-h-screen text-center">
+            <div className="container max-w-screen-sm mx-auto mt-16">
+                <img className="mx-auto" src={pic} alt="A girl chilling"/>
             </div>
+
+            <div className="ml-6 mr-6">
+                <h1 className="text-4xl pt-10 font-semibold text-gray-800">
+                    No More Gatekeeping – Study Notes for Everyone.
+                </h1>
+                <p className="pt-5">A community-driven platform where students share, discover, and learn together.</p>
+            </div>
+
+            <button className="mt-10 bg-gray-600 text-white p-2 pl-3 pr-3 rounded-full hover:bg-gray-800">
+                Get started
+            </button>
+
+
         </div>
     );
 }
