@@ -1,22 +1,32 @@
 import React, {useState} from "react"
 import headshot from './assets/notion-face.png'
 import { FaPen } from "react-icons/fa";
-
-
-
-
+import {TagBar} from "./Tag.jsx";
 const ProfilePage = () => {
-    const [follower, setFollower] = useState(0)
-    const name = "Rachel Kim"
+    const temp = {
+        Name: "Rachel Kim",
+        Bio: "Computer Science Student @ UCLA\nSpecializing in AI/ML + Full Stack Development",
+        Tags: ["Computer Science", "Machine Learning", "Python", "Data Structures"],
+        FollowerCount: 0,
+        NoteCount: 245,
+        FollowingCount: 890,
+    }
+
+    const [name, setName] = useState(temp.Name)
+    const [bio, setBio] = useState(temp.Bio)
+    const [tags, setTags] = useState(temp.Tags)
+    const [noteCount, setNoteCount] = useState(temp.NoteCount)
+    const [followerCount, setFollowerCount] = useState(temp.FollowerCount)
+    const [followingCount, setFollowingCount] = useState(temp.FollowingCount)
     function handleEdit() {
 
     }
+
     return (
         <div className="bg-gray-100 min-h-screen">
             <div className="p-1"></div>
             <section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow mt-6">
                 <div className="flex items-center space-x-6">
-                    {/*<div className="w-20 h-20 bg-gray-300 rounded-full flex-shrink-0"></div>*/}
                     <img className="w-24 h-24 rounded-full " src={headshot} alt="Profile"/>
                     <div className="flex-1">
                         <div className="flex mb-2">
@@ -26,23 +36,13 @@ const ProfilePage = () => {
                                     onClick={() => setFollower((follower) => follower + 1)}>+ Follow
                             </button>
                         </div>
-                        <p className="text-gray-600">Computer Science Student @ UCLA</p>
-                        <p className="text-gray-600">Specializing in AI/ML + Full Stack Development</p>
-                        <div className="flex space-x-2 mt-2">
-                            <span
-                                className="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full">Computer Science</span>
-                            <span
-                                className="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full">Machine Learning</span>
-                            <span className="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full">Python</span>
-                            <span
-                                className="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full">Data Structures</span>
-                        </div>
-
+                        <p className="text-gray-600">{bio}</p>
+                        <TagBar tagList={tags}/>
                     </div>
                     <div className="text-right">
-                        <p className="text-gray-700"><strong>245</strong> Notes</p>
-                        <p className="text-gray-700"><strong>{follower}</strong> Followers</p>
-                        <p className="text-gray-700"><strong>890</strong> Following</p>
+                        <p className="text-gray-700"><strong>{noteCount}</strong> Notes</p>
+                        <p className="text-gray-700"><strong>{followerCount}</strong> Followers</p>
+                        <p className="text-gray-700"><strong>{followingCount}</strong> Following</p>
                     </div>
                 </div>
             </section>
