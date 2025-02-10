@@ -12,12 +12,13 @@ Web app & online community for students to share study resources, tips, and conn
 
 ## Features
 - Upload and share notes
-- Customizable profile
+- Customize profile
 - Comment on posts
+- Search for post/note using tag
 
 ## Individual Contribution
 - Sonal Aggarwal
-- Tammy Sujaritchai 
+- Gayvalin (Tammy) Sujaritchai 
 - Megan Luu
 - Felicia Chen 
 - Kento Goodman
