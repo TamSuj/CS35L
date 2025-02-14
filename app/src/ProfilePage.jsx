@@ -2,7 +2,9 @@ import React, {useState} from "react"
 import headshot from './assets/notion-face.png'
 import { FaPen } from "react-icons/fa";
 import {TagBar} from "./Tag.jsx";
+import { useNavigate } from "react-router-dom";
 const ProfilePage = () => {
+    const navigate = useNavigate();
     const temp = {
         Name: "Rachel Kim",
         Bio: "Computer Science Student @ UCLA\nSpecializing in AI/ML + Full Stack Development",
@@ -18,9 +20,6 @@ const ProfilePage = () => {
     const [noteCount, setNoteCount] = useState(temp.NoteCount)
     const [followerCount, setFollowerCount] = useState(temp.FollowerCount)
     const [followingCount, setFollowingCount] = useState(temp.FollowingCount)
-    function handleEdit() {
-
-    }
 
     return (
         <div className="bg-gray-100 min-h-screen">
@@ -31,10 +30,10 @@ const ProfilePage = () => {
                     <div className="flex-1">
                         <div className="flex mb-2">
                             <h2 className="text-2xl font-semibold text-gray-800">{name}</h2>
-                            <button className="pl-2" onClick={handleEdit}><FaPen/></button>
-                            <button className="bg-gray-700 text-white text-md px-3 py-1 ml-3 rounded-full"
-                                    onClick={() => setFollower((follower) => follower + 1)}>+ Follow
-                            </button>
+                            <button className="pl-2" onClick={() => navigate('/profile/edit')}><FaPen/></button>
+                            {/*<button className="bg-gray-700 text-white text-md px-3 py-1 ml-3 rounded-full"*/}
+                            {/*        onClick={() => setFollower((follower) => follower + 1)}>+ Follow*/}
+                            {/*</button>*/}
                         </div>
                         <p className="text-gray-600">{bio}</p>
                         <TagBar tagList={tags}/>
