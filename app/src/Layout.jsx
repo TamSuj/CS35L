@@ -6,13 +6,13 @@ const Layout = () => {
         <>
             <nav className="bg-white p-4 flex justify-between">
                 {/*Left Logo*/}
-                <h1 className="text-xl font-bold text-gray-800 p-2"><Link to="/">StudyGram</Link></h1>
+                <h1 className="text-xl font-bold text-gray-800 p-2"><Link to="/" viewTransition>StudyGram</Link></h1>
 
                 {/*Right menus*/}
                 <div className="p-2">
-                    <a className="p-4"><Link to="/">Home</Link>
+                    <a className="p-4"><Link to="/" viewTransition>Home</Link>
                     </a>
-                    <a className="p-4" href=""><Link to="/profile">Profile</Link>
+                    <a className="p-4" href=""><Link to="/profile" viewTransition>Profile</Link>
                     </a>
                 </div>
             </nav>
