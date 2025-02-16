@@ -7,7 +7,8 @@ import ProfileEdit from "./ProfileEdit.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NoPage from "./NoPage.jsx";
 import Layout from "./Layout.jsx";
-
+import NewPost from "./NewPost.jsx";
+import './App.css';
 
 
 createRoot(document.getElementById('root')).render(
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')).render(
           <Route index element={<Home />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="profile/edit" element={<ProfileEdit />} />
+          <Route path="newpost" element={<NewPost />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
