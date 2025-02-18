@@ -23,7 +23,7 @@ function SignUpPage() {
 
   return (
     <div className="bg-white min-h-screen flex items-center justify-center">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-lg">
         <h2 className="text-2xl font-semibold mb-6 text-center">Create Your Account</h2>
         <form onSubmit={handleSubmit}>
           <div className="flex mb-4 space-x-4">
