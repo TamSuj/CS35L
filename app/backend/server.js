@@ -1,7 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import db from './config/db.js';
-//import User from '../../models/user.js';
 
 dotenv.config({path: '../../.env'}); // load in database and port
 const app = express();
