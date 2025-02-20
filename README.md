@@ -34,6 +34,11 @@ XXX
 - **Additional Features:**
     - XXXX
 
+## Install required packages
+```
+npm install express mongoose dotenv
+```
+
 ## How to run
 
 ```
