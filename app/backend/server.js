@@ -1,17 +1,15 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 
-import { User, Post, Comment, Tag, PostTag } from './user.js';
+import pkg from '../../models/user.js';
+const { User, Post, Comment, Tag, PostTag } = pkg;
 
-dotenv.config(); // load in database and port
+dotenv.config({path: '../../.env'}); // load in database and port
 const app = express();
 const port = process.env.PORT || 3000;
 
-mongoose.connect(process.env.DB_URI, { // TO DO: link to remote database
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+mongoose.connect(process.env.DB_URI)
   .then(() => {
     console.log('Connected to MongoDB');
   })

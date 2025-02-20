@@ -1,6 +1,6 @@
 // Schemas are defined here 
 
-// const mongoose = require('mongoose'); //not sure if this is needed here since it is already in app.js
+const mongoose = require('mongoose'); //not sure if this is needed here since it is already in app.js
 
 // Define the schema for the 'User' collection
 const postSchema = new mongoose.Schema({
@@ -35,7 +35,7 @@ const tagSchema = new mongoose.Schema({
     tagName: { type: String, default: null }
 });
 
-const postTag = new mongoose.Schema({
+const postTagSchema = new mongoose.Schema({
     postId: { type: String, required: true, default: null },
     tagName: { type: String, default: null}
 }); 
