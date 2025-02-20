@@ -2,13 +2,13 @@
 // use as refernece to write create functions to add to collections
 import mongoose from 'mongoose';
 import userSchema from '../../models/user.js';
-import db from './config/db.js';
+import db from './config/db.js'; // ensure path is correct
 
 const insertTestData = async () => { // WORKS !!!
   try {
     // MUST INITIALIZE MODEL AFTER CONNECTION IS 100% ESTABLISHED
     // Create the model in a separate file where the connection is established
-    const User = mongoose.model('User', userSchema);
+    const User = mongoose.model('User', userSchema); // arguments: model, schema
 
     const newUser = new User({
         username: "testUser", 

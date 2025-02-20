@@ -5,6 +5,6 @@ const commentSchema = new mongoose.Schema({
     username: { type: String, default: null },
     content: { type: String, default: null },
     createdAt: { type: Date, default: Date.now }
-}, { timestamps: true });
+}, { timestamps: true, collection: 'comment' });
 
 module.exports = commentSchema;

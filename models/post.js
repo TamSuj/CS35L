@@ -10,6 +10,6 @@ const postSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now },
     editedAt: { type: Date, default: Date.now },
     tags: { type: [String], default: [] }
-}, { timestamps: true });
+}, { timestamps: true, collection: 'post' });
 
 module.exports = postSchema;
