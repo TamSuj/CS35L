@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-dotenv.config({ path: ".env" }); // Load database and port
+dotenv.config({ path: "../../.env" });
 
 mongoose.connect(process.env.DB_URI);
 const db = mongoose.connection;
