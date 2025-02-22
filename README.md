@@ -34,11 +34,6 @@ XXX
 - **Additional Features:**
     - XXXX
 
-## Install required packages
-```
-npm install express mongoose dotenv
-```
-
 ## How to run
 
 ```
@@ -46,6 +41,13 @@ git clone https://github.com/TamSuj/CS35L.git
 cd app
 npm install
 npm run dev
+```
+
+In another terminal run:
+
+```
+cd backend
+node server.js
 ```
 ---  
 Documentation: [Optional]
