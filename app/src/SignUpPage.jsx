@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import userSchema from "../../models/user.js";
 
 function SignUpPage() {
   const [firstName, setFirstName] = useState("");
@@ -8,7 +9,7 @@ function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [data, setData] = useState(null);
+  const [bio, setBio] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -30,7 +31,8 @@ function SignUpPage() {
           lastName,
           username,
           email,
-          password
+          password,
+          bio
         })
       });
   
@@ -150,6 +152,22 @@ function SignUpPage() {
               required
               placeholder="Confirm your password"
               className="w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="bio"
+              className="block text-gray-700 text-sm font-medium mb-2"
+            >
+              Bio
+            </label>
+            <textarea
+              id="bio"
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
+              placeholder="Tell us about yourself"
+              className="w-full p-2 border border-gray-300 rounded"
+              rows="4"
             />
           </div>
           <button
