@@ -1,5 +1,7 @@
 import pic from "./assets/group.png";
 import SearchBar from "./searchBar.jsx";
+import { Link } from "react-router-dom";
+
 function Home() {
     return (
         <div className="min-h-screen text-center">
@@ -15,9 +17,8 @@ function Home() {
             </div>
 
             <button className="mt-10 bg-gray-600 text-white p-2 pl-3 pr-3 rounded-full hover:bg-gray-800">
-                Get started
+                <Link to="/login" viewTransition>Log In</Link>  
             </button>
-
 
         </div>
     );
