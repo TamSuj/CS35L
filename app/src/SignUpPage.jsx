@@ -22,6 +22,9 @@ function SignUpPage() {
     try {
       const response = await fetch('/api/register', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
           firstName,
           lastName,
@@ -34,11 +37,7 @@ function SignUpPage() {
       const data = await response.json();
       if (!response.ok) {
         throw new Error(data.message || 'Registration failed');
-      }
-      
-      console.log('Registration successful:', data);
-      navigate('/login'); // Redirect to login page
-  
+      }      
     } catch (error) {
       console.error('Error during registration:', error);
       alert(error.message);
