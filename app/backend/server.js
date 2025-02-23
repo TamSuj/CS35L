@@ -1,8 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import userSchema from "../../models/user.js";
-import "../routes";
+import register from "./routes/register.js";
 
 dotenv.config({ path: "../../.env" }); // load in database and port
 const app = express();
@@ -11,10 +10,7 @@ const port = process.env.PORT || 3001;
 // Establish MongoDB connection
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.DB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(process.env.DB_URI);
     console.log("MongoDB connected successfully");
   } catch (error) {
     console.error("MongoDB connection error:", error);
