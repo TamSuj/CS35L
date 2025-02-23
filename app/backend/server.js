@@ -33,7 +33,6 @@ app.get("/", (req, res) => {
 
 app.get("/api", (req, res) => {
   res.json({ message: "Hello from Express!" });
-  console.log("hello");
 });
 
 app.use("/api/register", register);
