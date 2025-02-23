@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import userSchema from "../../models/user.js";
-import db from "./config/db.js";
+import "../routes";
 
 dotenv.config({ path: "../../.env" }); // load in database and port
 const app = express();
@@ -40,32 +40,4 @@ app.get("/api", (req, res) => {
   console.log("hello");
 });
 
-app.post("/api/register", async (req, res) => {
-  try {
-    const { firstName, lastName, username, email, password } = req.body;
-
-    // Basic validation
-    if (!username || !email || !password) {
-      return res.status(400).json({ error: "All fields are required" });
-    }
-
-    // MUST INITIALIZE MODEL AFTER CONNECTION IS 100% ESTABLISHED
-    // Create the model in a separate file where the connection is established
-    const User = mongoose.model("User", userSchema); // arguments: model, schema
-
-    const newUser = new User({
-      username: username,
-      email: email,
-      name: firstName,
-      bio: lastName,
-      password: password,
-    });
-
-    await newUser.save();
-    console.log("Test data inserted successfully!");
-    res.status(201).json({ message: "User registered successfully" });
-  } catch (error) {
-    console.error("Registration error:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
+app.use("/api/register", register);
