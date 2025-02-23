@@ -1,7 +1,6 @@
 import express from express
 var router = express.Router()
 
-// ADDS A NEW USER TO THE DATABASE
 router.post("/", async (req, res) => {
     try {
       const { firstName, lastName, username, email, password } = req.body;
