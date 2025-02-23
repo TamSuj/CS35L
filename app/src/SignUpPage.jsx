@@ -8,18 +8,41 @@ function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [data, setData] = useState(null);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO (feliciachen): Add your sign up/authentication logic here
+    
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
-    console.log({ firstName, lastName, username, email, password, confirmPassword });
-    navigate("/");
-  };
+
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          username,
+          email,
+          password
+        })
+      });
+  
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || 'Registration failed');
+      }
+      
+      console.log('Registration successful:', data);
+      navigate('/login'); // Redirect to login page
+  
+    } catch (error) {
+      console.error('Error during registration:', error);
+      alert(error.message);
+    } };
 
   return (
     <div className="bg-white min-h-screen flex items-center justify-center">
