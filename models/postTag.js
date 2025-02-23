@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const postTagSchema = new mongoose.Schema(
   {
@@ -7,3 +7,5 @@ const postTagSchema = new mongoose.Schema(
   },
   { collection: "postTag" }
 );
+
+export default postTagSchema;

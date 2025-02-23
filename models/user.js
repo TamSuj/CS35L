@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 // Define the schema for the 'User' collection
 const userSchema = new mongoose.Schema(
@@ -13,3 +13,5 @@ const userSchema = new mongoose.Schema(
   },
   { collection: "user" }
 );
+
+export default userSchema;
