@@ -1,7 +1,13 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const postSchema = new mongoose.Schema({
-    postID: { type: String, required: true, unique: true, default: () => require('uuid').v4() },
+const postSchema = new mongoose.Schema(
+  {
+    postID: {
+      type: String,
+      required: true,
+      unique: true,
+      default: () => require("uuid").v4(),
+    },
     textContent: { type: String, default: null },
     fileContent: { type: String, required: false, default: null },
     username: { type: String, default: null },
@@ -9,7 +15,7 @@ const postSchema = new mongoose.Schema({
     comments: { type: [Number], default: [] },
     createdAt: { type: Date, default: Date.now },
     editedAt: { type: Date, default: Date.now },
-    tags: { type: [String], default: [] }
-}, { timestamps: true, collection: 'post' });
-
-module.exports = postSchema;
+    tags: { type: [String], default: [] },
+  },
+  { timestamps: true, collection: "post" }
+);
