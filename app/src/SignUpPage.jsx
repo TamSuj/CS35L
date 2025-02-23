@@ -10,13 +10,14 @@ function SignUpPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [bio, setBio] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (password !== confirmPassword) {
-      alert("Passwords do not match!");
+      setError("Passwords do not match!");
       return;
     }
 
@@ -39,16 +40,25 @@ function SignUpPage() {
       const data = await response.json();
       if (!response.ok) {
         throw new Error(data.error || 'Registration failed');
-      }      
+      }
+      
+      // If successful, redirect to login
+      navigate('/login');
     } catch (error) {
       console.error('Error during registration:', error);
-      alert(error.error);
-    } };
+      setError(error.message);
+    }
+  };
 
   return (
     <div className="bg-white min-h-screen flex items-center justify-center">
       <div className="w-full max-w-lg">
         <h2 className="text-2xl font-semibold mb-6 text-center">Create Your Account</h2>
+        {error && (
+          <div className="mb-4 p-2 bg-red-50 text-red-600 rounded">
+            {error}
+          </div>
+        )}
         <form onSubmit={handleSubmit}>
           <div className="flex mb-4 space-x-4">
             <div className="w-1/2">
