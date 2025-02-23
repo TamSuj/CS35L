@@ -3,6 +3,7 @@ import headshot from './assets/notion-face.png'
 import { FaPen } from "react-icons/fa";
 import {TagBar} from "./Tag.jsx";
 import { useNavigate } from "react-router-dom";
+import {Note, NoteGallery} from "./Note.jsx";
 const ProfilePage = () => {
     const navigate = useNavigate();
     const temp = {
@@ -12,7 +13,40 @@ const ProfilePage = () => {
         FollowerCount: 0,
         NoteCount: 245,
         FollowingCount: 890,
+        Posts: [
+            {
+                title: "Data Structure",
+                likeCount: 12,
+                comments: 1,
+                createdAt: "June 12, 2025",
+            },
+            {
+                title: "Linear Algebra",
+                likeCount: 20,
+                comments: 5,
+                createdAt: "May 28, 2025",
+            },
+            {
+                title: "Machine Learning",
+                likeCount: 32,
+                comments: 6,
+                createdAt: "March 12, 2025",
+            },
+            {
+                title: "Operating Systems",
+                likeCount: 9,
+                comments: 0,
+                createdAt: "Jan 28, 2025",
+            },
+            {
+                title: "Discrete Math",
+                likeCount: 10,
+                comments: 2,
+                createdAt: "Dec 9, 2024",
+            },
+    ],
     }
+
 
     const [name, setName] = useState(temp.Name)
     const [bio, setBio] = useState(temp.Bio)
@@ -57,37 +91,38 @@ const ProfilePage = () => {
 
             <section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow mt-6">
                 <h3 className="text-xl font-semibold text-gray-800 mb-4">Study Notes</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="bg-gray-100 p-4 rounded-lg">
-                        <div className="text-gray-800 text-2xl">📄</div>
-                        <p className="mt-2 font-semibold text-gray-800">Advanced Algorithm Analysis</p>
-                        <p className="text-gray-600 text-sm">March 15, 2025</p>
-                        <div className="flex space-x-2 mt-2 text-gray-600 text-sm">
-                            <span>❤️ 24</span>
-                            <span>💬 8</span>
-                        </div>
-                    </div>
+                <NoteGallery noteList={temp.Posts}/>
+                {/*<div className="grid grid-cols-1 md:grid-cols-3 gap-4">*/}
+                {/*    <div className="bg-gray-100 p-4 rounded-lg">*/}
+                {/*        <div className="text-gray-800 text-2xl">📄</div>*/}
+                {/*        <p className="mt-2 font-semibold text-gray-800">Advanced Algorithm Analysis</p>*/}
+                {/*        <p className="text-gray-600 text-sm">March 15, 2025</p>*/}
+                {/*        <div className="flex space-x-2 mt-2 text-gray-600 text-sm">*/}
+                {/*            <span>❤️ 24</span>*/}
+                {/*            <span>💬 8</span>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
 
-                    <div className="bg-gray-100 p-4 rounded-lg">
-                        <div className="text-gray-800 text-2xl">📄</div>
-                        <p className="mt-2 font-semibold text-gray-800">Neural Networks Basics</p>
-                        <p className="text-gray-600 text-sm">March 12, 2025</p>
-                        <div className="flex space-x-2 mt-2 text-gray-600 text-sm">
-                            <span>❤️ 56</span>
-                            <span>💬 12</span>
-                        </div>
-                    </div>
+                {/*    <div className="bg-gray-100 p-4 rounded-lg">*/}
+                {/*        <div className="text-gray-800 text-2xl">📄</div>*/}
+                {/*        <p className="mt-2 font-semibold text-gray-800">Neural Networks Basics</p>*/}
+                {/*        <p className="text-gray-600 text-sm">March 12, 2025</p>*/}
+                {/*        <div className="flex space-x-2 mt-2 text-gray-600 text-sm">*/}
+                {/*            <span>❤️ 56</span>*/}
+                {/*            <span>💬 12</span>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
 
-                    <div className="bg-gray-100 p-4 rounded-lg">
-                        <div className="text-gray-800 text-2xl">📄</div>
-                        <p className="mt-2 font-semibold text-gray-800">Database Systems Design</p>
-                        <p className="text-gray-600 text-sm">March 10, 2025</p>
-                        <div className="flex space-x-2 mt-2 text-gray-600 text-sm">
-                            <span>❤️ 32</span>
-                            <span>💬 5</span>
-                        </div>
-                    </div>
-                </div>
+                {/*    <div className="bg-gray-100 p-4 rounded-lg">*/}
+                {/*        <div className="text-gray-800 text-2xl">📄</div>*/}
+                {/*        <p className="mt-2 font-semibold text-gray-800">Database Systems Design</p>*/}
+                {/*        <p className="text-gray-600 text-sm">March 10, 2025</p>*/}
+                {/*        <div className="flex space-x-2 mt-2 text-gray-600 text-sm">*/}
+                {/*            <span>❤️ 32</span>*/}
+                {/*            <span>💬 5</span>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
             </section>
         </div>
     );

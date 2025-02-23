@@ -5,11 +5,12 @@
 // Define the schema for the 'User' collection
 const postSchema = new mongoose.Schema({
     postID: { type: String, required: true, unique: true, default: () => require('uuid').v4() }, //UUID
+    title: { type: String,  required: true, default: null },
     textContent: { type: String, default: null },
     fileContent: { type: String, required: false, default: null }, //optional
     username: { type: String, default: null }, //UUID of the user posting it
     likeCount: { type: Number, default: 0},
-    comments: { type: [Number], default: []}, //array of comments to the post
+    comments: { type: [String], default: []}, //array of comments to the post
     createdAt: { type: Date, default: Date.now },
     editedAt: { type: Date, default: Date.now }, 
     tags: { type: [String], default: [] }

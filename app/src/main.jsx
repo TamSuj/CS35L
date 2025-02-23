@@ -8,8 +8,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NoPage from "./NoPage.jsx";
 import Layout from "./Layout.jsx";
 
-
-
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
       <Routes>
