@@ -13,5 +13,3 @@ const userSchema = new mongoose.Schema(
   },
   { collection: "user" }
 );
-
-module.exports = userSchema;

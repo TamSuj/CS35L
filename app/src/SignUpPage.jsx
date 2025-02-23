@@ -36,11 +36,11 @@ function SignUpPage() {
   
       const data = await response.json();
       if (!response.ok) {
-        throw new Error(data.message || 'Registration failed');
+        throw new Error(data.error || 'Registration failed');
       }      
     } catch (error) {
       console.error('Error during registration:', error);
-      alert(error.message);
+      alert(error.error);
     } };
 
   return (

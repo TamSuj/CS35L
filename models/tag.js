@@ -1,7 +1,8 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const tagSchema = new mongoose.Schema({
-    tagName: { type: String, default: null }
-}, { collection: 'tag' });
-
-module.exports = tagSchema;
+const tagSchema = new mongoose.Schema(
+  {
+    tagName: { type: String, default: null },
+  },
+  { collection: "tag" }
+);
