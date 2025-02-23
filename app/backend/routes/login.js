@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ error: "Email and password are required" });
     }
 
-    const User = mongoose.model("User", userSchema);
+    const User = mongoose.models.User || mongoose.model('User', userSchema);
     const user = await User.findOne({ email });
 
     if (!user) {
