@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import userSchema from "../../models/user.js";
+import User from "../../models/user.js";
 
 const router = express.Router();
 
@@ -12,7 +12,6 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ error: "Email and password are required" });
     }
 
-    const User = mongoose.models.User || mongoose.model('User', userSchema);
     const user = await User.findOne({ email });
 
     if (!user) {
