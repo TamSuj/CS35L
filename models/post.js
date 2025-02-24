@@ -12,7 +12,7 @@ const postSchema = new mongoose.Schema(
     fileContent: { type: String, required: false, default: null },
     username: { type: String, default: null },
     likeCount: { type: Number, default: 0 },
-    comments: { type: [Number], default: [] },
+    comments: { type: [String], default: [] },
     createdAt: { type: Date, default: Date.now },
     editedAt: { type: Date, default: Date.now },
     tags: { type: [String], default: [] },

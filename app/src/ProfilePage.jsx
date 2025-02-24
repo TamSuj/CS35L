@@ -46,8 +46,7 @@ const ProfilePage = () => {
                         <button
                             onClick={handleLogout}
                             className="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
-                        >
-                            Log Out
+                        >Log Out
                         </button>
                     </div>
                 </div>
@@ -64,38 +63,7 @@ const ProfilePage = () => {
 
             <section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow mt-6">
                 <h3 className="text-xl font-semibold text-gray-800 mb-4">Study Notes</h3>
-                <NoteGallery noteList={temp.Posts}/>
-                {/*<div className="grid grid-cols-1 md:grid-cols-3 gap-4">*/}
-                {/*    <div className="bg-gray-100 p-4 rounded-lg">*/}
-                {/*        <div className="text-gray-800 text-2xl">📄</div>*/}
-                {/*        <p className="mt-2 font-semibold text-gray-800">Advanced Algorithm Analysis</p>*/}
-                {/*        <p className="text-gray-600 text-sm">March 15, 2025</p>*/}
-                {/*        <div className="flex space-x-2 mt-2 text-gray-600 text-sm">*/}
-                {/*            <span>❤️ 24</span>*/}
-                {/*            <span>💬 8</span>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-
-                {/*    <div className="bg-gray-100 p-4 rounded-lg">*/}
-                {/*        <div className="text-gray-800 text-2xl">📄</div>*/}
-                {/*        <p className="mt-2 font-semibold text-gray-800">Neural Networks Basics</p>*/}
-                {/*        <p className="text-gray-600 text-sm">March 12, 2025</p>*/}
-                {/*        <div className="flex space-x-2 mt-2 text-gray-600 text-sm">*/}
-                {/*            <span>❤️ 56</span>*/}
-                {/*            <span>💬 12</span>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-
-                {/*    <div className="bg-gray-100 p-4 rounded-lg">*/}
-                {/*        <div className="text-gray-800 text-2xl">📄</div>*/}
-                {/*        <p className="mt-2 font-semibold text-gray-800">Database Systems Design</p>*/}
-                {/*        <p className="text-gray-600 text-sm">March 10, 2025</p>*/}
-                {/*        <div className="flex space-x-2 mt-2 text-gray-600 text-sm">*/}
-                {/*            <span>❤️ 32</span>*/}
-                {/*            <span>💬 5</span>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+                <NoteGallery noteList={user.posts || []}/>
             </section>
         </div>
     );
