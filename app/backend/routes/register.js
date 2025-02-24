@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import userSchema from "../../../models/user.js";
+import userSchema from "../../models/user.js";
 
 var router = express.Router();
 
