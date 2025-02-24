@@ -8,4 +8,5 @@ const postTagSchema = new mongoose.Schema(
   { collection: "postTag" }
 );
 
-export default postTagSchema;
+const PostTag = mongoose.model("PostTag", postTagSchema);
+export default PostTag;
