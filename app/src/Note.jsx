@@ -1,6 +1,4 @@
-import React, {useState} from "react";
-import {Tag} from "./Tag.jsx";
-
+import React from "react";
 export function Note({title, date, commentCount, likeCount}) {
     return (
         <div className="bg-gray-100 p-4 rounded-lg">
@@ -19,7 +17,7 @@ export function NoteGallery({noteList}) {
     return(
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {noteList.map((note, index) => (
-                <Note key={index} title={note.title} date={note.createdAt.toString()} commentCount={note.comments.length} likeCount={note.likeCount}/>
+                <Note key={index} title={note.textContent} date={note.createdAt.toString()} commentCount={note.comments.length} likeCount={note.likeCount}/>
             ))}
         </div>
     )
