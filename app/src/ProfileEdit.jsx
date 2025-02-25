@@ -49,6 +49,17 @@ const ProfileEdit = () => {
                 throw new Error(data.error || 'Profile Update failed');
             }
 
+            // Update localStorage with new user data
+            const updatedUser = {
+                ...JSON.parse(localStorage.getItem('user')), // Keep everything else the same
+                firstName,
+                lastName,
+                bio,
+                tags: tag,
+            };
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+
+
             // If successful, redirect to profile page
             navigate('/profile');
         } catch (error) {

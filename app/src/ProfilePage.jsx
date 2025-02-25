@@ -1,25 +1,29 @@
-import React, {useState, useEffect} from "react"
-import headshot from './assets/notion-face.png'
+import React, { useState, useEffect } from "react";
 import { FaPen } from "react-icons/fa";
-import {TagBar} from "./Tag.jsx";
 import { useNavigate } from "react-router-dom";
-import {Note, NoteGallery} from "./Note.jsx";
-const ProfilePage = () => {
-    const navigate = useNavigate();
-    const [user, setUser] = useState(null);
+import { NoteGallery } from "./Note.jsx";
+import { TagBar } from "./Tag.jsx";
+import headshot from './assets/notion-face.png';
 
-    useEffect(() => {
-        // Get user data from localStorage
-        const userData = JSON.parse(localStorage.getItem('user'));
-        if (userData) {
-            setUser(userData);
-        }
-    }, []);
+const ProfilePage = () => {
+    const [user, setUser] = useState(() => {
+        const savedUser = localStorage.getItem('user');
+        return savedUser ? JSON.parse(savedUser) : null;
+    });
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         localStorage.removeItem('user');
         navigate('/login');
     };
+
+    useEffect(() => {
+        // Re-fetch user data from localStorage to ensure it stays updated
+        const savedUser = localStorage.getItem('user');
+        if (savedUser) {
+            setUser(JSON.parse(savedUser));
+        }
+    }, []);
 
     if (!user) {
         return <div>Please Log In!</div>;
@@ -30,10 +34,10 @@ const ProfilePage = () => {
             <div className="p-1"></div>
             <section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow mt-6">
                 <div className="flex items-center space-x-6">
-                    <img className="w-24 h-24 rounded-full " src={headshot} alt="Profile"/>
+                    <img className="w-24 h-24 rounded-full " src={user.profilePic || headshot} alt="Profile"/>
                     <div className="flex-1">
                         <div className="flex mb-2">
-                            <h2 className="text-2xl font-semibold text-gray-800">{user.name}</h2>
+                            <h2 className="text-2xl font-semibold text-gray-800">{user.firstName} {user.lastName}</h2>
                             <button className="pl-2" onClick={() => navigate('/profile/edit')}><FaPen/></button>
                         </div>
                         <p className="text-gray-600">{user.bio}</p>
