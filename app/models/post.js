@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { v4 as uuidv4 } from "uuid";
 
 const postSchema = new mongoose.Schema(
   {
@@ -6,15 +7,21 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      default: () => require("uuid").v4(),
+      default: uuidv4,
+    },
+    postTitle: {
+      type: String,
+      required: true,
     },
     textContent: { type: String, default: null },
     fileContent: { type: String, required: false, default: null },
-    username: { type: String, default: null },
+    userID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     likeCount: { type: Number, default: 0 },
-    comments: { type: [Number], default: [] },
-    createdAt: { type: Date, default: Date.now },
-    editedAt: { type: Date, default: Date.now },
+    comments: { type: [mongoose.Schema.Types.ObjectId], ref: "Comment", default: [] },
     tags: { type: [String], default: [] },
   },
   { timestamps: true, collection: "post" }
