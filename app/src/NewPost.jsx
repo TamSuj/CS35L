@@ -25,10 +25,19 @@ export default function NewPost() {
             alert("Post content cannot be empty!");
             return;
         }
+
+        const user = localStorage.getItem("user");
+        if (!user) {
+            alert("Please log in or sign up to make a post.")
+            return;
+        }
+        const userId = JSON.parse(user).id;
     
         const formData = new FormData();
+        formData.append("postTitle", noteTitle);
         formData.append("textContent", noteText);
         fileUploads.forEach((file) => formData.append("fileContent", file));
+        formData.append("userID", userId);
     
         try {
             const response = await fetch("/api/post/new", {

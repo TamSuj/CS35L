@@ -14,13 +14,14 @@ const upload = multer({ storage });
 
 router.post("/new", upload.single("fileContent"), async (req, res) => {
     try {
-        const { textContent } = req.body;
+        const { textContent, postTitle, userID } = req.body;
 
         const newPost = new Post({
             postID: uuidv4(),
+            postTitle,
             textContent,
             fileContent: req.file ? req.file.filename : null,
-            //username,
+            userID,
             likeCount: 0,
             //comments: [],
             //tags: tags ? tags.split(",") : [],
