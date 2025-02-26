@@ -1,5 +1,6 @@
 import React from 'react';
 import fileUploadIcon from "./assets/file-upload-icon.svg";
+import NewPostHeader from './NewPostHeader.jsx';
 
 export default function NewPost() {
     const [noteTitle, setNoteTitle] = React.useState("");
@@ -19,7 +20,45 @@ export default function NewPost() {
         setFileUploads((fileUploads) => [...fileUploads, ...newFiles]);
     };
 
+    const handleSavePost = async () => {
+        if (!noteText.trim()) {
+            alert("Post content cannot be empty!");
+            return;
+        }
+    
+        const formData = new FormData();
+        formData.append("textContent", noteText);
+        fileUploads.forEach((file) => formData.append("fileContent", file));
+    
+        try {
+            const response = await fetch("/api/post/new", {
+                method: "POST",
+                body: formData,
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error with status: ${response.status}`);
+            }
+    
+            const data = await response.json();
+            console.log("Post saved successfully!");
+            console.log(data);
+    
+            // Clear the form after saving
+            setNoteTitle("");
+            setNoteText("");
+            setFileUploads([]);
+        } catch (error) {
+            console.error("Error saving post:", error);
+            alert("Failed to save post.");
+        }
+    };
+    
+
+
   return (
+    <>
+    <NewPostHeader onSave={handleSavePost} />
     <div className="new-post">
         <div className="new-post-flexbox">
             <div className="type-note">
@@ -62,5 +101,6 @@ export default function NewPost() {
             </div>
         </div>
     </div>
+    </>
   )
 }
