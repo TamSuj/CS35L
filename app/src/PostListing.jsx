@@ -2,7 +2,6 @@ import React from 'react';
 import NotionFace from "./assets/notion-face.png";
 
 export default function PostListing({ post }) {
-    console.log("post in PostListing:", post);
     const filePreview = post.fileContent && (
         post.fileContent.endsWith(".pdf") ? (
             <embed

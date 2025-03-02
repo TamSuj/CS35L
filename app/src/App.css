@@ -199,3 +199,79 @@
     display: flex;
     justify-content: flex-start;
 }
+
+/* POST POPUP */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75); /* ✅ Dark overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    border: none;
+    background: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.post-popup-pfp {
+    height: 50px;
+    width: 50px;
+}
+
+.post-popup-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    /* padding: 0.5rem 0;
+    width: 100%;
+    text-align: left; */
+}
+
+.post-popup-user-info {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    align-items: center;
+    width: 100%;
+    padding: 0.25rem 0;
+    /* border-bottom: 2px solid #ddd; */
+    width: 100%;
+}
+
+/* POST POPUP HR - Divider */
+.post-popup-hr {
+    border: none;
+    height: 2px;
+    background-color: #ddd;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.post-popup-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
