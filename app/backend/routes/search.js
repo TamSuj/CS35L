@@ -1,10 +1,6 @@
 import express from "express";
-import mongoose from "mongoose";
-
-// Search users, posts, and tags
 import User from "../../models/user.js";
 import Post from "../../models/post.js";
-import Tag from "../../models/tag.js";
 
 const router = express.Router();
 
@@ -16,12 +12,23 @@ router.post("/", async (req, res) => {
             username: { $regex: query, $options: "i" }
         });
 
-        if (userResults.length === 0) { // or use userResults.length === 0
-            console.log("NO USER FOUND");
-            return res.json({ results: userResults });
+        const postResults = await Post.find({
+            $or: [
+                { postTitle: { $regex: query, $options: "i" }},
+                { textContent: { $regex: query, $options: "i" }},
+                { postTags: { $regex: query, $options: "i" }}
+            ]
+            
+        });
+
+        const searchResults = [userResults || [], postResults || []];
+
+        if (searchResults.length === 0) {
+            console.log("NO USERS OR POSTS FOUND");
+            return res.json({ results: [[], []] });
         }
 
-        res.json({ results: userResults });
+        res.json({ results: searchResults });
     } catch (error) {
         console.error("Search error: ", error);
         return res.status(500).json({ error: "Search failed" });

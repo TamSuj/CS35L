@@ -30,6 +30,7 @@ function SearchBar() {
             navigate('/results', {
                 state: { results: data.results } 
             });
+            console.log("Search results: ", data.results);
         } catch (error) {
             console.error("Search error: ", error);
         }
