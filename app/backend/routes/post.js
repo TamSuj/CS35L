@@ -46,6 +46,17 @@ router.get("/all", async (req, res) => {
     }
 });
 
+router.get("/:postId", async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.postId).populate("userID", "username");
+        if (!post) return res.status(404).json({ error: "Post not found" });
+        res.json(post);
+    } catch (error) {
+        console.error("Error fetching post:", error);
+        res.status(500).json({ error: "Failed to fetch post" });
+    }
+});
+
 
 export default router;
 

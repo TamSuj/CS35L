@@ -1,12 +1,16 @@
 import React from "react";
 import NotionFace from "./assets/notion-face.png";
+import { Link } from "react-router-dom";
 
 export default function PostPopup({ post, onClose }) {
     return (
         <div className="popup-overlay" onClick={onClose}>
             <div className="popup-content" onClick={(e) => e.stopPropagation()}>
                 <button className="popup-close" onClick={onClose}>✖</button>
-                <h2 className="post-popup-title">{post.postTitle || "Untitled"}</h2>
+                {/* <h2 className="post-popup-title">{post.postTitle || "Untitled"}</h2> */}
+                <Link to={`/post/${post._id}`} className="post-title-link">
+                    {post.postTitle || "Untitled"}
+                </Link>
                 <div className="post-popup-user-info">
                     <img src={NotionFace} className="post-popup-pfp" />
                     <p>{post.userID?.username || "Unknown User"}</p>

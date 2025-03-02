@@ -200,6 +200,15 @@
     justify-content: flex-start;
 }
 
+.post-title-link {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.post-title-link:hover {
+    text-decoration: underline;
+}
+
 /* POST POPUP */
 .popup-overlay {
     position: fixed;
@@ -207,7 +216,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.75); /* ✅ Dark overlay */
+    background: rgba(0, 0, 0, 0.75);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -260,7 +269,6 @@
     width: 100%;
 }
 
-/* POST POPUP HR - Divider */
 .post-popup-hr {
     border: none;
     height: 2px;
@@ -275,3 +283,88 @@
     gap: 1rem;
 }
 
+/* POST PAGE */
+.post-page {
+    /* max-width: 800px; */
+    max-width: 1000px;
+    /* min-width: 800px; */
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-page-title {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.post-page-user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+.post-page-pfp {
+    height: 50px;
+    width: 50px;
+}
+
+.post-page-hr {
+    border: none;
+    height: 1px;
+    background-color: #ddd;
+    margin: 1rem 0;
+    /* width: 100%; */
+}
+
+.post-page-right {
+    padding-top: 1rem;
+    text-align: left;
+}
+
+.post-page-body {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.post-page-wrapper {
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding-top: 0;
+}
+
+.post-page-back-button {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.post-page-user-info {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    align-items: center;
+    width: 100%;
+    padding: 0.25rem 0;
+    /* border-bottom: 2px solid #ddd; */
+    width: 100%;
+}
+
+.post-page-back-button:hover {
+    text-decoration: underline;
+}
+
+.post-page-text-only {
+    width: 100%;
+    min-width: 800px;
+}

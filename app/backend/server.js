@@ -5,10 +5,17 @@ import register from "./routes/register.js";
 import login from "./routes/login.js";
 import post from "./routes/post.js";
 import search from "./routes/search.js";
+import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config({ path: "../../.env" }); // load in database and port
 const app = express();
 const port = process.env.PORT || 3001;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const frontendPath = path.join(__dirname, "../dist"); 
+app.use(express.static(frontendPath));
 
 // Establish MongoDB connection
 const connectDB = async () => {
@@ -43,3 +50,7 @@ app.use("/api/login", login);
 app.use("/api/post", post);
 app.use("/api/search", search);
 app.use("/uploads", express.static("uploads"));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(frontendPath, "index.html"));
+});

@@ -1,5 +1,6 @@
 import React from 'react';
 import NotionFace from "./assets/notion-face.png";
+import { Link } from "react-router-dom";
 
 export default function PostListing({ post }) {
     const filePreview = post.fileContent && (
@@ -23,7 +24,12 @@ export default function PostListing({ post }) {
     return (
         <div className="post-listing">
             <div className="post-listing-title">
-                {post.postTitle || "Untitled" }
+                {/* <a href={`/post/${post._id}`} className="post-title-link" target="_blank" rel="noopener noreferrer">
+                    {post.postTitle || "Untitled"}
+                </a> */}
+                <Link to={`/post/${post._id}`} className="post-title-link">
+                    {post.postTitle || "Untitled"}
+                </Link>
             </div>
             <div className="post-listing-user-info">
                 <img src={NotionFace} alt="user avatar" className="post-listing-pfp"></img>
