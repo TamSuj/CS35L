@@ -21,13 +21,7 @@ router.post("/", async (req, res) => {
             
         });
 
-        const searchResults = [userResults || [], postResults || []];
-
-        if (searchResults.length === 0) {
-            console.log("NO USERS OR POSTS FOUND");
-            return res.json({ results: [[], []] });
-        }
-
+        const searchResults = [userResults, postResults];
         res.json({ results: searchResults });
     } catch (error) {
         console.error("Search error: ", error);
