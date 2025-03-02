@@ -32,14 +32,24 @@ function SearchBar() {
 
     };
     return (
-        <form onSubmit={handleSubmit} className="p-2 pl-5 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all w-full">
+        <form onSubmit={handleSubmit} className="p-2 pl-5 pr-5 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all w-full max-w-full flex items-center">
             <input
                 type="text"
                 placeholder="Search..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)} 
-                className="w-full p-2 focus:outline-none"
+                className="flex-grow p-2 focus:outline-none overflow-hidden bg-transparent"
+                style={{
+                    overflow: "hidden"
+                }}
             />
+            {query && (
+                <button
+                    type="button"
+                    onClick={() => setQuery('')}
+                    className="ml-5 text-gray-500 hover:text-gray-700 focus:outline-none"
+                >✖</button>
+            )}
             <button type="submit" className="hidden">Search</button>
         </form>
     );
