@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import register from "./routes/register.js";
 import login from "./routes/login.js";
+import post from "./routes/post.js";
 import search from "./routes/search.js";
 
 dotenv.config({ path: "../../.env" }); // load in database and port
@@ -39,4 +40,5 @@ app.get("/api", (req, res) => {
 
 app.use("/api/register", register);
 app.use("/api/login", login);
+app.use("/api/post", post);
 app.use("/api/search", search);

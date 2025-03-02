@@ -9,21 +9,7 @@ const Layout = () => {
         <>
             {/* Check if we're on /newpost to use a different navbar */}
             {location.pathname === "/newpost" ? (
-                <nav className="bg-white p-4 flex justify-between items-center max-w-[90%] mx-auto">
-                    {/* Left Section: Back Arrow + "New Note" */}
-                    <div className="flex items-center gap-2">
-                        <Link to="/" viewTransition className="flex items-center">
-                            <img src={arrowLeft} alt="Back" className="w-6 h-6" />
-                        </Link>
-                        <span className="text-xl font-bold text-gray-800">New Note</span>
-                    </div>
-                
-                    {/* Right Section: Save Button */}
-                    <button className="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800">
-                        <Link to="/newpost" viewTransition>Save</Link>
-                    </button>
-                </nav>
-            
+                <></>
             ) : (
                 <nav className="bg-white p-4 flex justify-between items-center">
                     {/* Left Logo */}
