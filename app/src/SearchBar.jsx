@@ -7,7 +7,6 @@ function SearchBar() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Searched ", query);
         if(query === ""){
             console.error("Please enter a search query");
             return;
@@ -30,7 +29,6 @@ function SearchBar() {
             navigate('/results', {
                 state: { results: data.results } 
             });
-            console.log("Search results: ", data.results);
         } catch (error) {
             console.error("Search error: ", error);
         }
