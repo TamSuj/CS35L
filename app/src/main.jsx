@@ -10,6 +10,7 @@ import Layout from "./Layout.jsx";
 import NewPost from "./NewPost.jsx";
 import LoginPage from "./LoginPage.jsx";
 import SignUpPage from "./SignUpPage.jsx";
+import SearchResults from './SearchResults.jsx';
 import './App.css';
 
 createRoot(document.getElementById('root')).render(
@@ -22,6 +23,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/newpost" element={<NewPost />} />
+          <Route path="/results" element={<SearchResults />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

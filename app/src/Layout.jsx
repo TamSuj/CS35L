@@ -1,5 +1,6 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
-import SearchBar from "./searchBar.jsx";
+import SearchBar from "./SearchBar.jsx";
+import arrowLeft from "./assets/left-arrow.svg";
 
 const Layout = () => {
     const location = useLocation();
