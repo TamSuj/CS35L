@@ -42,3 +42,4 @@ app.use("/api/register", register);
 app.use("/api/login", login);
 app.use("/api/post", post);
 app.use("/api/search", search);
+app.use("/uploads", express.static("uploads"));

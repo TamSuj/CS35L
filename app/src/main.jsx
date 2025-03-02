@@ -12,6 +12,7 @@ import LoginPage from "./LoginPage.jsx";
 import SignUpPage from "./SignUpPage.jsx";
 import SearchResults from './SearchResults.jsx';
 import './App.css';
+import Feed from './Feed.jsx';
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/newpost" element={<NewPost />} />
           <Route path="/results" element={<SearchResults />} />
+          <Route path="/feed" element={<Feed />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

@@ -36,5 +36,16 @@ router.post("/new", upload.single("fileContent"), async (req, res) => {
     }
 });
 
+router.get("/all", async (req, res) => {
+    try {
+        const posts = await Post.find().populate("userID", "username");
+        res.json(posts);
+    } catch (error) {
+        console.error("Error fetching posts:", error);
+        res.status(500).json({ error: "Failed to fetch posts" });
+    }
+});
+
+
 export default router;
 
