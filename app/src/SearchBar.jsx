@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function SearchBar() {
     const [query, setQuery] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,13 +26,15 @@ function SearchBar() {
                 throw new Error("Search failed");
             }
 
-            const data = await response.json();
-            console.log("Search results: ", data);
+            const data = await response.json();            
+            navigate('/results', {
+                state: { results: data.results } 
+            });
         } catch (error) {
             console.error("Search error: ", error);
         }
-
     };
+
     return (
         <form onSubmit={handleSubmit} className="p-2 pl-5 pr-5 border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all w-full max-w-full flex items-center">
             <input
