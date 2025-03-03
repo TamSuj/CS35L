@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import NotionFace from "./assets/notion-face.png";
+import LikeButton from "./LikeButton";
+
 
 export default function PostPage() {
     const { postId } = useParams();
     const [post, setPost] = useState(null);
+    const [isLiked, setIsLiked] = useState(false);
+    const [likeCount, setLikeCount] = useState(0);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -15,7 +19,7 @@ export default function PostPage() {
     }, [postId, navigate]);
 
     if (!post) return <p>Loading post...</p>;
-
+    
     return (
         <div className="post-page-wrapper">
             <div className="post-page">
@@ -41,7 +45,11 @@ export default function PostPage() {
                         <div className="post-page-text">
                             <p>{post.textContent}</p>
                         </div>
+                        <div className="like-button">
+                            <LikeButton postId={post._id} initialLikes={post.likeCount} />
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
