@@ -27,6 +27,7 @@ export default function PostPopup({ post, onClose }) {
                         />
                     )}
                 </div>
+                <p>ireiunerifn</p>
             </div>
         </div>
     );
