@@ -1,5 +1,4 @@
 import pic from "./assets/group.png";
-import SearchBar from "./searchBar.jsx";
 import { Link } from "react-router-dom";
 
 function Home() {

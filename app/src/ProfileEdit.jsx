@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ProfileEdit = () => {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const [name, setName] = useState("");
     const [bio, setBio] = useState("");
     const [error, setError] = useState("");
     const [tag, setTag] = useState([]);
@@ -37,8 +36,7 @@ const ProfileEdit = () => {
                 },
                 body: JSON.stringify({
                     userId,
-                    firstName,
-                    lastName,
+                    name,
                     bio,
                     tag,
                 })
@@ -52,8 +50,7 @@ const ProfileEdit = () => {
             // Update localStorage with new user data
             const updatedUser = {
                 ...JSON.parse(localStorage.getItem('user')), // Keep everything else the same
-                firstName,
-                lastName,
+                name,
                 bio,
                 tags: tag,
             };
@@ -61,7 +58,7 @@ const ProfileEdit = () => {
 
 
             // If successful, redirect to profile page
-            navigate('/profile');
+            navigate(`/profile`);
         } catch (error) {
             console.error('Error during profile update:', error);
             setError(error.message);
@@ -73,26 +70,15 @@ const ProfileEdit = () => {
             <div className="p-1"></div>
             <section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow mt-6">
                 {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+                <h1 className="text-2xl font-semibold text-gray-800 text-center mt-6 mb-6">Edit Profile</h1>
                 <form onSubmit={handleSubmit}>
-                    <div className="grid gap-6 mb-6 md:grid-cols-2">
-                        <div>
-                            <label htmlFor="firstName"
-                                   className="block mb-2 text-sm font-medium">First name</label>
-                            <input type="text" id="firstName"
-                                   value={firstName}
-                                   onChange={(e) => setFirstName(e.target.value)}
-                                   className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                   placeholder="John" required/>
-                        </div>
-                        <div>
-                            <label htmlFor="lastName"
-                                   className="block mb-2 text-sm font-medium">Last name</label>
-                            <input type="text" id="lastName"
-                                   value={lastName}
-                                   onChange={(e) => setLastName(e.target.value)}
-                                   className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                   placeholder="Doe" required/>
-                        </div>
+                    <div className="mb-6">
+                        <label className="block mb-2 text-sm font-medium">Name</label>
+                        <input type="text" id="name"
+                               value={name}
+                               onChange={(e) => setName(e.target.value)}
+                               className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                               placeholder="John Doe"/>
                     </div>
                     <div className="mb-6">
                         <label className="block mb-2 text-sm font-medium">Bio</label>

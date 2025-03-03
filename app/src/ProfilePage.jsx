@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { NoteGallery } from "./Note.jsx";
 import { TagBar } from "./Tag.jsx";
 import headshot from './assets/notion-face.png';
+import LogInRequired from "./LogInRequired.jsx";
 
 const ProfilePage = () => {
     const [user, setUser] = useState(() => {
@@ -26,7 +27,7 @@ const ProfilePage = () => {
     }, []);
 
     if (!user) {
-        return <div>Please Log In!</div>;
+        return <LogInRequired/>;
     }
 
     return (
@@ -37,16 +38,16 @@ const ProfilePage = () => {
                     <img className="w-24 h-24 rounded-full " src={user.profilePic || headshot} alt="Profile"/>
                     <div className="flex-1">
                         <div className="flex mb-2">
-                            <h2 className="text-2xl font-semibold text-gray-800">{user.firstName} {user.lastName}</h2>
+                            <h2 className="text-2xl font-semibold text-gray-800">{user.name}</h2>
                             <button className="pl-2" onClick={() => navigate('/profile/edit')}><FaPen/></button>
                         </div>
                         <p className="text-gray-600">{user.bio}</p>
                         <TagBar tagList={user.tags || []}/>
                     </div>
                     <div className="text-right">
-                        <p className="text-gray-700"><strong>{user.noteCount || 0}</strong> Notes</p>
-                        <p className="text-gray-700"><strong>{user.followerCount || 0}</strong> Followers</p>
-                        <p className="text-gray-700"><strong>{user.followingCount || 0}</strong> Following</p>
+                        <p className="text-gray-700"><strong>{user.stats?.noteCount || 0}</strong> Notes</p>
+                        <p className="text-gray-700"><strong>{user.stats?.followerCount || 0}</strong> Followers</p>
+                        <p className="text-gray-700"><strong>{user.stats?.followingCount || 0}</strong> Following</p>
                         <button
                             onClick={handleLogout}
                             className="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
