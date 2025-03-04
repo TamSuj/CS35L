@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import userSchema from "../../models/user.js";
+import userSchema from "../models/user.js";
 
 function SignUpPage() {
   const [firstName, setFirstName] = useState("");

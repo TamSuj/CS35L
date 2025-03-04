@@ -10,7 +10,10 @@ import Layout from "./Layout.jsx";
 import NewPost from "./NewPost.jsx";
 import LoginPage from "./LoginPage.jsx";
 import SignUpPage from "./SignUpPage.jsx";
+import SearchResults from './SearchResults.jsx';
+import PostPage from "./PostPage.jsx";
 import './App.css';
+import Feed from './Feed.jsx';
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -22,6 +25,9 @@ createRoot(document.getElementById('root')).render(
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/newpost" element={<NewPost />} />
+          <Route path="/results" element={<SearchResults />} />
+          <Route path="/feed" element={<Feed />} />
+          <Route path="post/:postId" element={<PostPage />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

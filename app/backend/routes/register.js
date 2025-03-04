@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import userSchema from "../../../models/user.js";
+import User from "../../models/user.js";
 
 var router = express.Router();
 
@@ -11,8 +11,6 @@ router.post("/", async (req, res) => {
     if (!username || !email || !password) {
       return res.status(400).json({ error: "All fields are required" });
     }
-
-    const User = mongoose.model("User", userSchema);
 
     const newUser = new User({
       username: username,

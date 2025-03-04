@@ -1,7 +1,7 @@
 // Test script to insert test data into MongoDB
 // use as refernece to write create functions to add to collections
 import mongoose from "mongoose";
-import userSchema from "../../models/user.js";
+import userSchema from "../models/user.js";
 import db from "./config/db.js"; // ensure path is correct
 
 const insertTestData = async () => {

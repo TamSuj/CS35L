@@ -3,12 +3,21 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import register from "./routes/register.js";
 import login from "./routes/login.js";
+import post from "./routes/post.js";
+import search from "./routes/search.js";
+import path from "path";
+import { fileURLToPath } from "url";
 import profileUpdate from "./routes/profileUpdate.js";
 import users from "./routes/users.js";
 
 dotenv.config({ path: "../../.env" }); // load in database and port
 const app = express();
 const port = process.env.PORT || 3001;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const frontendPath = path.join(__dirname, "../dist");
+app.use(express.static(frontendPath));
 
 // Establish MongoDB connection
 const connectDB = async () => {
@@ -40,5 +49,12 @@ app.get("/api", (req, res) => {
 
 app.use("/api/register", register);
 app.use("/api/login", login);
+app.use("/api/post", post);
+app.use("/api/search", search);
+app.use("/uploads", express.static("uploads"));
 app.use("/api/profile/update", profileUpdate)
 app.use("/api/user", users);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(frontendPath, "index.html"));
+});
