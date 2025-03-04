@@ -1,30 +1,52 @@
 import React, { useState, useEffect } from "react";
 import { FaPen } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { NoteGallery } from "./Note.jsx";
 import { TagBar } from "./Tag.jsx";
 import headshot from './assets/notion-face.png';
 import LogInRequired from "./LogInRequired.jsx";
 
 const ProfilePage = () => {
-    const [user, setUser] = useState(() => {
-        const savedUser = localStorage.getItem('user');
-        return savedUser ? JSON.parse(savedUser) : null;
-    });
+    const { id } = useParams();  // Get user ID from URL params
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            try {
+                const response = await fetch(`/api/user/${id}`);
+                if (!response.ok) {
+                    throw new Error("User not found");
+                }
+                const data = await response.json();
+                setUser(data);
+            } catch (err) {
+                setError(err.message);
+            }
+            setLoading(false);
+        };
+
+        fetchUserProfile();
+    }, [id]);
+
+
+    // Handle logout
     const handleLogout = () => {
         localStorage.removeItem('user');
         navigate('/login');
     };
 
-    useEffect(() => {
-        // Re-fetch user data from localStorage to ensure it stays updated
-        const savedUser = localStorage.getItem('user');
-        if (savedUser) {
-            setUser(JSON.parse(savedUser));
-        }
-    }, []);
+    if (loading) {
+        return <div className="flex items-center justify-center p-4 bg-gray-100 rounded-lg shadow-md">
+            <div className="animate-pulse text-xl text-gray-600">Loading...</div>
+        </div>
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     if (!user) {
         return <LogInRequired/>;
@@ -35,14 +57,14 @@ const ProfilePage = () => {
             <div className="p-1"></div>
             <section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow mt-6">
                 <div className="flex items-center space-x-6">
-                    <img className="w-24 h-24 rounded-full " src={user.profilePic || headshot} alt="Profile"/>
+                    <img className="w-24 h-24 rounded-full " src={user.profilePic || headshot} alt="Profile" />
                     <div className="flex-1">
                         <div className="flex mb-2">
-                            <h2 className="text-2xl font-semibold text-gray-800">{user.name}</h2>
-                            <button className="pl-2" onClick={() => navigate('/profile/edit')}><FaPen/></button>
+                            <h2 className="text-2xl font-semibold text-gray-800">{user.name || "Unnamed User"}</h2>
+                            <button className="pl-2" onClick={() => navigate('/profile/edit')}><FaPen /></button>
                         </div>
                         <p className="text-gray-600">{user.bio}</p>
-                        <TagBar tagList={user.tags || []}/>
+                        <TagBar tagList={user.tags || []} />
                     </div>
                     <div className="text-right">
                         <p className="text-gray-700"><strong>{user.stats?.noteCount || 0}</strong> Notes</p>
@@ -68,7 +90,7 @@ const ProfilePage = () => {
 
             <section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow mt-6">
                 <h3 className="text-xl font-semibold text-gray-800 mb-4">Study Notes</h3>
-                <NoteGallery noteList={user.posts || []}/>
+                <NoteGallery noteList={user.posts || []} />
             </section>
         </div>
     );

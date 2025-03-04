@@ -7,7 +7,7 @@ const router = express.Router();
 // Update user profile
 router.put("/", async (req, res) => {
   try {
-    const { firstName, lastName, bio, tag, userId } = req.body;
+    const { name, bio, tag, userId } = req.body;
 
     // Directly use userId passed in the body
     if (!userId) {
@@ -20,9 +20,9 @@ router.put("/", async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate(
         userId,
         {
-          name: `${firstName} ${lastName}`,
+          name: name,
           bio: bio,
-          tag: tag,
+          tags: tag, // [ { tagName: 'tag1' }, { tagName: 'tag2' } ]
         },
         { new: true } // Return updated document
     );

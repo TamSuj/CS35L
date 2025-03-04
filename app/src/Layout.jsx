@@ -4,6 +4,7 @@ import arrowLeft from "./assets/left-arrow.svg";
 
 const Layout = () => {
     const location = useLocation();
+    const user = JSON.parse(localStorage.getItem("user"));
 
     return (
         <>
@@ -41,7 +42,11 @@ const Layout = () => {
                                 <Link to="/newpost" viewTransition>+ Create</Link>
                             </button>
                             <Link className="p-2" to="/" viewTransition>Home</Link>
-                            <Link className="p-2" to="/profile" viewTransition>Profile</Link>
+                            {user ? (
+                                <Link className="p-2" to={`/profile/${user.id}`} viewTransition>Profile</Link>
+                            ) : (
+                                <Link className="p-2" to="/login" viewTransition>Login</Link>
+                            )}
                         </div>
                     </div>
                 </nav>

@@ -13,7 +13,7 @@ const ProfileEdit = () => {
         // Get userId from localStorage or context
         const user = JSON.parse(localStorage.getItem("user"));
         if (user && user.id) {
-            setUserId(user.id); // Set the userId from the localStorage
+            setUserId(user.id);
         }
     }, []);
 
@@ -26,7 +26,7 @@ const ProfileEdit = () => {
         }
 
         try {
-            const token = localStorage.getItem("token"); // Assuming the token is stored in localStorage
+            const token = localStorage.getItem("token");
 
             const response = await fetch('/api/profile/update', {
                 method: 'PUT',
@@ -47,18 +47,15 @@ const ProfileEdit = () => {
                 throw new Error(data.error || 'Profile Update failed');
             }
 
-            // Update localStorage with new user data
             const updatedUser = {
-                ...JSON.parse(localStorage.getItem('user')), // Keep everything else the same
+                ...JSON.parse(localStorage.getItem('user')),
                 name,
                 bio,
                 tags: tag,
             };
             localStorage.setItem('user', JSON.stringify(updatedUser));
 
-
-            // If successful, redirect to profile page
-            navigate(`/profile`);
+            navigate(`/profile/${userId}`);
         } catch (error) {
             console.error('Error during profile update:', error);
             setError(error.message);
