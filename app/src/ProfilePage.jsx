@@ -79,14 +79,14 @@ const ProfilePage = () => {
                 </div>
             </section>
 
-            <section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow mt-6">
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">Achievements</h3>
-                <div className="flex space-x-4">
-                    <div className="bg-gray-100 px-4 py-2 rounded-md">🏆 Top Contributor</div>
-                    <div className="bg-gray-100 px-4 py-2 rounded-md">🔥 Study Streak: 30 days</div>
-                    <div className="bg-gray-100 px-4 py-2 rounded-md">🤝 Community Moderator</div>
-                </div>
-            </section>
+            {/*<section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow mt-6">*/}
+            {/*    <h3 className="text-xl font-semibold text-gray-800 mb-4">Achievements</h3>*/}
+            {/*    <div className="flex space-x-4">*/}
+            {/*        <div className="bg-gray-100 px-4 py-2 rounded-md">🏆 Top Contributor</div>*/}
+            {/*        <div className="bg-gray-100 px-4 py-2 rounded-md">🔥 Study Streak: 30 days</div>*/}
+            {/*        <div className="bg-gray-100 px-4 py-2 rounded-md">🤝 Community Moderator</div>*/}
+            {/*    </div>*/}
+            {/*</section>*/}
 
             <section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow mt-6">
                 <h3 className="text-xl font-semibold text-gray-800 mb-4">Study Notes</h3>
