@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
-import userSchema from "../../../models/user.js";
+// import userSchema from "../../models/user.js";
+import User from "../../models/user.js";
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ router.put("/", async (req, res) => {
       return res.status(400).json({ error: "User ID is required" });
     }
 
-    const User = mongoose.models.User || mongoose.model("User", userSchema);
+    // const User = mongoose.models.User || mongoose.model("User", userSchema);
 
     // Find user by ID and update
     const updatedUser = await User.findByIdAndUpdate(

@@ -1,13 +1,14 @@
 import express from "express";
 import mongoose from "mongoose";
-import userSchema from "../../../models/user.js";  // Import the user schema
+// import userSchema from "../../../models/user.js";  // Import the user schema
+import User from "../../models/user.js";
 
 const router = express.Router();
 
 router.get("/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        const User = mongoose.models.User || mongoose.model('User', userSchema);
+        // const User = mongoose.models.User || mongoose.model('User', userSchema);
         const user = await User.findById(id);
 
         if (!user) {

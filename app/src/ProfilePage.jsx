@@ -52,6 +52,14 @@ const ProfilePage = () => {
         return <LogInRequired/>;
     }
 
+    function PostResult({post}) {
+        return (
+            <li className="flex items-center space-x-4 p-2 border-b border-gray-300">
+                <p className="text-lg font-medium text-gray-800 mb-4">📄 {post.postTitle || post.textContent}</p>
+            </li>
+        );
+    }
+
     return (
         <div className="bg-gray-100 min-h-screen">
             <div className="p-1"></div>
@@ -90,7 +98,17 @@ const ProfilePage = () => {
 
             <section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow mt-6">
                 <h3 className="text-xl font-semibold text-gray-800 mb-4">Study Notes</h3>
-                <NoteGallery noteList={user.posts || []} />
+                <NoteGallery noteList={user.posts || []}/>
+
+                {/*    Post result*/}
+                <div>
+                    <h3 className="text-2xl font-semibold text-gray-700 p-2">Posts</h3>
+                    <ul className="space-y-4 p-4">
+                        {postResults.map((post) => (
+                            <PostResult key={post._id} post={post}/>
+                        ))}
+                    </ul>
+                </div>
             </section>
         </div>
     );
