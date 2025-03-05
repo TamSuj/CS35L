@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaPen } from "react-icons/fa";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { NoteGallery } from "./Note.jsx";
 import { TagBar } from "./Tag.jsx";
 import headshot from './assets/notion-face.png';
@@ -11,7 +11,9 @@ const ProfilePage = () => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [Posts, setPosts] = useState([]);
     const navigate = useNavigate();
+
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -22,6 +24,16 @@ const ProfilePage = () => {
                 }
                 const data = await response.json();
                 setUser(data);
+                console.log(data);
+
+                if (data.posts.length > 0) {
+                    const postResponses = await Promise.all(
+                        data.posts.map(postId =>
+                            fetch(`/api/post/${postId}`).then(res => res.json())
+                        )
+                    );
+                    setPosts(postResponses);
+                }
             } catch (err) {
                 setError(err.message);
             }
@@ -50,14 +62,6 @@ const ProfilePage = () => {
 
     if (!user) {
         return <LogInRequired/>;
-    }
-
-    function PostResult({post}) {
-        return (
-            <li className="flex items-center space-x-4 p-2 border-b border-gray-300">
-                <p className="text-lg font-medium text-gray-800 mb-4">📄 {post.postTitle || post.textContent}</p>
-            </li>
-        );
     }
 
     return (
@@ -98,17 +102,7 @@ const ProfilePage = () => {
 
             <section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow mt-6">
                 <h3 className="text-xl font-semibold text-gray-800 mb-4">Study Notes</h3>
-                <NoteGallery noteList={user.posts || []}/>
-
-                {/*    Post result*/}
-                <div>
-                    <h3 className="text-2xl font-semibold text-gray-700 p-2">Posts</h3>
-                    <ul className="space-y-4 p-4">
-                        {postResults.map((post) => (
-                            <PostResult key={post._id} post={post}/>
-                        ))}
-                    </ul>
-                </div>
+                <NoteGallery noteList={user.posts}/>
             </section>
         </div>
     );

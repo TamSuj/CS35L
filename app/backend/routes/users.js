@@ -20,6 +20,7 @@ router.get("/:id", async (req, res) => {
             email: user.email,
             name: user.name,
             bio: user.bio,
+            posts: user.posts,
             profilePic: user.profilePic,
             tags: user.tags,
             stats: user.stats,
