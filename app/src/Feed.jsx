@@ -40,7 +40,7 @@ export default function Feed() {
     console.log("selected post", selectedPost);
 
     return (
-    <div className="feed-page">
+    <div className="feed-page bg-gray-100 h-screen p-4">
         <div className="filter-bar">
             {categories.map((category, index) => (
                 <button key={index} onClick={() => filtered(category)} className={"p-2 px-4 mt-2 ml-2 text-white rounded-full " + (category == selectedCategory ? "bg-gray-600" : "bg-black")}>
@@ -48,6 +48,13 @@ export default function Feed() {
                 </button>
             ))}
         </div>
+        {filteredPosts.length === 0 && (
+            <div className="flex justify-center items-center h-64">
+                <p className="text-gray-700 text-lg font-medium">
+                    No "{selectedCategory}" posts found
+                </p>
+            </div>
+        )}
         <div className="feed-page-content">
             {...postListings}
             {selectedPost && (
