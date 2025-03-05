@@ -1,9 +1,15 @@
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import headshot from './assets/notion-face.png'
 
 function UserResult({user}) {
+    const navigate = useNavigate();
+
     return (
-        <li className="flex items-center space-x-4 p-2 border-b border-gray-300">
+        <li 
+            className="flex items-center space-x-4 p-2 border-b border-gray-300"
+            role="button"
+            onClick={() => navigate('/profile')} //'/profile/' + user.username when routes are implemented
+        >
             <img className="w-24 h-24 rounded-full" src={headshot} alt="Profile"/>
             <p className="text-lg font-medium text-gray-800">{user.username}</p>
         </li>
