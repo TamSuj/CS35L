@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import NotionFace from "./assets/notion-face.png";
+import LikeButton from "./LikeButton";
 
 
 export default function PostPage() {
@@ -16,13 +17,6 @@ export default function PostPage() {
             .then((data) => setPost(data))
             .catch(() => navigate("/feed"));
     }, [postId, navigate]);
-
-    const handleLikeClick = () => {
-        const newLikeState = !isLiked;
-        setIsLiked(newLikeState);
-        setLikeCount(prevCount => newLikeState ? prevCount + 1 : prevCount - 1);
-
-    };
 
     if (!post) return <p>Loading post...</p>;
     
@@ -51,15 +45,8 @@ export default function PostPage() {
                         <div className="post-page-text">
                             <p>{post.textContent}</p>
                         </div>
-                        <div className="post-page-like-section" style={{ display: 'flex', flexDirection: 'column', 
-                            justifyContent: 'flex-end', alignItems: 'center', height: '300px'}}>
-                            <button
-                                onClick={handleLikeClick}
-                                className={`like-button ${isLiked ? "liked" : ""}`}
-                            >
-                                {isLiked ? "❤️" : "🤍"}
-                            </button>
-                            <span>{likeCount} Likes</span>
+                        <div className="like-button">
+                            <LikeButton postId={post._id} initialLikes={post.likeCount} />
                         </div>
                     </div>
 
