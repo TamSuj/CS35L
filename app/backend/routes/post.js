@@ -97,6 +97,28 @@ router.get('/:postId/isPoster', async (req, res) => {
     }
 });
 
+router.put('/:postId/edit', upload.single('fileContent'), async (req, res) => {
+    const { postId } = req.params;
+    const { textContent, postTitle, userID } = req.body;
+    try{
+        const post = await Post.findById(postId);
+        if(!post){
+            return res.status(404).json({error: "Post not found"});
+        }
+
+        post.textContent = textContent || post.textContent;
+        post.postTitle = postTitle || post.postTitle;
+
+        if (req.file) {
+            post.fileContent = req.file.filename;
+        }
+
+        await post.save();
+        res.status(201).json({ message: "Post saved successfully!", post: post });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 export default router;
 

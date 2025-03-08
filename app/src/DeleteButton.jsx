@@ -19,7 +19,6 @@ const DeleteButton = ({ postId }) => {
                     }
 
                     const data = await response.json();
-                    console.log(data);
                     if(data.isPoster){
                         setIsPoster(true);
                     };
@@ -35,7 +34,6 @@ const DeleteButton = ({ postId }) => {
 
     const handleDelete = async() => {
         const user = JSON.parse(localStorage.getItem('user'));
-        console.log("Confirmation is set to: ", confirmation);
         if(!user || !user.id){
             return; //error
         }
@@ -62,7 +60,6 @@ const DeleteButton = ({ postId }) => {
             setConfirmation(true);
         }
     };
-    console.log("Is Poster: ", isPoster);
     if (!isPoster) return null;
     return (
         <button className = "delete-button" onClick = { handleDelete }>
