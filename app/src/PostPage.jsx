@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import NotionFace from "./assets/notion-face.png";
+import DeleteButton from "./DeleteButton";
 
 export default function PostPage() {
     const { postId } = useParams();
@@ -42,6 +43,9 @@ export default function PostPage() {
                             <p>{post.textContent}</p>
                         </div>
                     </div>
+                </div>
+                <div className="delete-button-container">
+                    <DeleteButton postId={post._id} />
                 </div>
             </div>
         </div>
