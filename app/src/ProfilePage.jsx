@@ -12,6 +12,7 @@ const ProfilePage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [Posts, setPosts] = useState([]);
+    const [noteCount, setNoteCount] = useState(0);
     const navigate = useNavigate();
 
 
@@ -24,7 +25,6 @@ const ProfilePage = () => {
                 }
                 const data = await response.json();
                 setUser(data);
-                console.log(data);
 
                 if (data.posts.length > 0) {
                     const postResponses = await Promise.all(
@@ -33,6 +33,7 @@ const ProfilePage = () => {
                         )
                     );
                     setPosts(postResponses);
+                    setNoteCount(postResponses.length);
                 }
             } catch (err) {
                 setError(err.message);
@@ -64,6 +65,44 @@ const ProfilePage = () => {
         return <LogInRequired/>;
     }
 
+    const renderNotes = (notes) => {
+        return (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {notes.map((note) => (
+                    <div key={note.postID} className="bg-gray-100 p-4 rounded-lg">
+                        <div className="text-gray-800 text-2xl">📄</div>
+                        <p className="mt-2 font-semibold text-gray-800">{note.postTitle}</p>
+                        <p className="text-gray-600 text-sm">
+                            {note.createdAt ? new Date(note.createdAt).toDateString() : "Unknown Date"}
+                        </p>
+                        <div className="flex space-x-2 mt-2 text-gray-600 text-sm">
+                            <span>❤️ {note.likeCount || 0}</span>
+                            <span>💬 {note.comments?.length || 0}</span>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        );
+    };
+
+    const calculateAchievements = (stats) => {
+        const achievements = [];
+
+        if (noteCount >= 5) {
+            achievements.push({ icon: "🏆", title: "Top Contributor" });
+        }
+        if (stats?.followerCount >= 10) {
+            achievements.push({ icon: "🤝", title: "Community Moderator" });
+        }
+        if (stats?.noteCount >= 30) {
+            achievements.push({ icon: "🔥", title: `Study Streak: ${stats?.noteCount} days` });
+        }
+
+        return achievements;
+    };
+
+    const achievements = calculateAchievements(user.stats);
+
     return (
         <div className="bg-gray-100 min-h-screen">
             <div className="p-1"></div>
@@ -79,7 +118,7 @@ const ProfilePage = () => {
                         <TagBar tagList={user.tags || []} />
                     </div>
                     <div className="text-right">
-                        <p className="text-gray-700"><strong>{user.stats?.noteCount || 0}</strong> Notes</p>
+                        <p className="text-gray-700"><strong>{noteCount || 0}</strong> Notes</p>
                         <p className="text-gray-700"><strong>{user.stats?.followerCount || 0}</strong> Followers</p>
                         <p className="text-gray-700"><strong>{user.stats?.followingCount || 0}</strong> Following</p>
                         <button
@@ -91,18 +130,24 @@ const ProfilePage = () => {
                 </div>
             </section>
 
-            {/*<section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow mt-6">*/}
-            {/*    <h3 className="text-xl font-semibold text-gray-800 mb-4">Achievements</h3>*/}
-            {/*    <div className="flex space-x-4">*/}
-            {/*        <div className="bg-gray-100 px-4 py-2 rounded-md">🏆 Top Contributor</div>*/}
-            {/*        <div className="bg-gray-100 px-4 py-2 rounded-md">🔥 Study Streak: 30 days</div>*/}
-            {/*        <div className="bg-gray-100 px-4 py-2 rounded-md">🤝 Community Moderator</div>*/}
-            {/*    </div>*/}
-            {/*</section>*/}
+            <section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow mt-6">
+                <h3 className="text-xl font-semibold text-gray-800 mb-4">Achievements</h3>
+                <div className="flex space-x-4">
+                    {achievements.length > 0 ? (
+                        achievements.map((achievement, index) => (
+                            <div key={index} className="bg-gray-100 px-4 py-2 rounded-md hover:bg-gray-200">
+                                {achievement.icon} {achievement.title}
+                            </div>
+                        ))
+                    ) : (
+                        <div className="bg-gray-100 px-4 py-2 rounded-md">No Achievements Yet</div>
+                    )}
+                </div>
+            </section>
 
             <section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow mt-6">
                 <h3 className="text-xl font-semibold text-gray-800 mb-4">Study Notes</h3>
-                <NoteGallery noteList={user.posts}/>
+                {renderNotes(Posts)}
             </section>
         </div>
     );
