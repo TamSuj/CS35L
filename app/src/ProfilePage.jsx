@@ -93,7 +93,7 @@ const ProfilePage = () => {
         if (stats?.followerCount >= 10) {
             achievements.push({ icon: "🤝", title: "Community Moderator" });
         }
-        if (stats?.noteCount >= 30) {
+        if (noteCount >= 30) {
             achievements.push({ icon: "🔥", title: `Study Streak: ${noteCount} days` });
         }
 
