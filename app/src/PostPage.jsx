@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import NotionFace from "./assets/notion-face.png";
 import DeleteButton from "./DeleteButton";
 import EditButton from './EditButton';
+import LikeButton from "./LikeButton";
 
 export default function PostPage() {
     const { postId } = useParams();
@@ -33,7 +34,7 @@ export default function PostPage() {
                                 height="400px"
                             />
                         )}
-                    </div>
+                    </div> 
                     <div className={post.fileContent? "post-page-left" : "post-page-text-only"}>
                         <div className="post-page-user-info">
                             <img src={NotionFace} className="post-page-pfp" />
@@ -45,10 +46,13 @@ export default function PostPage() {
                         </div>
                     </div>
                 </div>
-                
                 <div className="poster-buttons-container">
                     <EditButton postId={postId}/>
                     <DeleteButton postId={post._id} />
+                </div>
+
+                <div className="like-button">
+                    <LikeButton postId={post._id} initialLikes={post.likeCount} />
                 </div>
             </div>
         </div>
