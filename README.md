@@ -15,10 +15,24 @@ Web app & online community for students to share study resources, tips, and conn
 
 ## Features
 
-- Upload and share notes
-- Customize profile
-- Comment on posts
-- Search for post/note using tag
+### Post
+- Creating post 
+- Edit/Delete post
+- View posts in feed
+- Upload file(s) to post
+- Like post
+- Add tags to post
+
+### Profile page
+- Customize/Edit profile
+
+### Search
+- Search for posts/people using tags
+
+### Authentication
+- Create new account
+- Log in
+- Log out
 
 ## Individual Contribution
 
@@ -35,11 +49,13 @@ XXX
 ## Future Improvements
 
 - **Enhancements:**
-  - XXXX
+  - Consolidate API endpoints
+  - Optimize API calls
 - **Refactoring Opportunities:**
-  - [Code/architecture to refine/optimize.]
+  - Reorganize components
+  - Improve code readability
 - **Additional Features:**
-  - XXXX
+  - Comment on posts
 
 ## How to run
 
@@ -58,5 +74,3 @@ node server.js
 ```
 
 ---
-
-Documentation: [Optional]
