@@ -21,6 +21,7 @@ const postSchema = new mongoose.Schema(
       required: true,
     },
     likeCount: { type: Number, default: 0 },
+    likedBy: {type: [String], default: []},
     comments: { type: [mongoose.Schema.Types.ObjectId], ref: "Comment", default: [] },
     createdAt: { type: Date, default: Date.now },
     editedAt: { type: Date, default: Date.now },

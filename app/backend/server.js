@@ -6,6 +6,7 @@ import login from "./routes/login.js";
 import post from "./routes/post.js";
 import search from "./routes/search.js";
 import path from "path";
+import cors from 'cors';
 import { fileURLToPath } from "url";
 import profileUpdate from "./routes/profileUpdate.js";
 import users from "./routes/users.js";
@@ -19,6 +20,7 @@ const __dirname = path.dirname(__filename);
 const frontendPath = path.join(__dirname, "../dist");
 app.use(express.static(frontendPath));
 
+app.use(cors()); // may need to run 'npm install cors' 
 // Establish MongoDB connection
 const connectDB = async () => {
   try {

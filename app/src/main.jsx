@@ -12,6 +12,7 @@ import LoginPage from "./LoginPage.jsx";
 import SignUpPage from "./SignUpPage.jsx";
 import SearchResults from './SearchResults.jsx';
 import PostPage from "./PostPage.jsx";
+import EditPostPage from "./EditPostPage.jsx";
 import './App.css';
 import Feed from './Feed.jsx';
 
@@ -29,6 +30,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/feed" element={<Feed />} />
           <Route path="post/:postId" element={<PostPage />} />
           <Route path="*" element={<NoPage />} />
+          <Route path="/post/:postId/edit" element={<EditPostPage />} />
         </Route>
       </Routes>
     </BrowserRouter>,
