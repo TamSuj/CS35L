@@ -57,7 +57,7 @@ export default function PostPage() {
                 </div>
 
                 <div className="post-listing-tags">
-                                <TagBar tagList={post.tags || []} />
+                    <TagBar tagList={post.tags || []} />
                 </div>
             </div>
         </div>

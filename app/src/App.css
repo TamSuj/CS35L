@@ -400,3 +400,12 @@
     display: inline-block;
     margin: 4px 2px;
 }
+
+.post-listing-tags {
+    display: flex;         
+    justify-content: center; 
+    align-items: center;    
+    margin-top: 1rem;      
+    flex-wrap: wrap;       
+    gap: 0.5rem;           
+}
