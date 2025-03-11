@@ -31,6 +31,8 @@ router.post("/new", upload.single("fileContent"), async (req, res) => {
             editedAt: new Date(),
         });
 
+        console.log("newPost", newPost);
+
         await newPost.save();
         await User.findByIdAndUpdate(userID, {
             $push: { posts: newPost._id }
