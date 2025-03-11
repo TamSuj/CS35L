@@ -1,9 +1,15 @@
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import headshot from './assets/notion-face.png'
 
 function UserResult({user}) {
+    const navigate = useNavigate();
+
     return (
-        <li className="flex items-center space-x-4 p-2 border-b border-gray-300">
+        <li 
+            className="flex items-center space-x-4 p-2 border-b border-gray-300"
+            role="button"
+            onClick={() => navigate(`/profile/${user._id}`)} //'/profile/' + user.username when routes are implemented
+        >
             <img className="w-24 h-24 rounded-full" src={headshot} alt="Profile"/>
             <p className="text-lg font-medium text-gray-800">{user.username}</p>
         </li>
@@ -11,8 +17,14 @@ function UserResult({user}) {
 }
 
 function PostResult({post}) {
+    const navigate = useNavigate();
+
     return (
-        <li className="flex items-center space-x-4 p-2 border-b border-gray-300">
+        <li 
+            className="flex items-center space-x-4 p-2 border-b border-gray-300"
+            role="button"
+            onClick={() => navigate(`/post/${post._id}`)} // '/post/' + post._id
+        >
         <p className="text-lg font-medium text-gray-800 mb-4">📄 {post.postTitle || post.textContent}</p>
         </li>
     );

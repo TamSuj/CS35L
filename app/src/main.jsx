@@ -12,14 +12,17 @@ import LoginPage from "./LoginPage.jsx";
 import SignUpPage from "./SignUpPage.jsx";
 import SearchResults from './SearchResults.jsx';
 import PostPage from "./PostPage.jsx";
+import EditPostPage from "./EditPostPage.jsx";
 import './App.css';
 import Feed from './Feed.jsx';
 
+const isUserLoggedIn = localStorage.getItem("user");
+console.log("currUser", isUserLoggedIn);
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
+          <Route index element={isUserLoggedIn ? <Feed /> : <Home />} />
           <Route path="/profile/:id" element={<ProfilePage />} />
           <Route path="/profile/edit" element={<ProfileEdit />} />
           <Route path="/login" element={<LoginPage />} />
@@ -29,6 +32,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/feed" element={<Feed />} />
           <Route path="post/:postId" element={<PostPage />} />
           <Route path="*" element={<NoPage />} />
+          <Route path="/post/:postId/edit" element={<EditPostPage />} />
         </Route>
       </Routes>
     </BrowserRouter>,

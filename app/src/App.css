@@ -286,6 +286,7 @@
 /* POST PAGE */
 .post-page {
     /* max-width: 800px; */
+    position: relative;
     max-width: 1000px;
     /* min-width: 800px; */
     margin: 2rem auto;
@@ -367,4 +368,44 @@
 .post-page-text-only {
     width: 100%;
     min-width: 800px;
+}
+
+.poster-buttons-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;  
+    z-index: 10;
+}
+
+.delete-button{
+    border: 1px solid rgb(211, 211, 211);
+    border-radius: 4px;
+    background-color: white;
+    color: rgb(239, 128, 128);
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+    margin: 4px 2px;
+}
+
+.edit-button {
+    border: 1px solid rgb(211, 211, 211);
+    border-radius: 4px;
+    background-color: white;
+    color: rgb(123, 216, 123);
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+    margin: 4px 2px;
+}
+
+.post-listing-tags {
+    display: flex;         
+    justify-content: center; 
+    align-items: center;    
+    margin-top: 1rem;      
+    flex-wrap: wrap;       
+    gap: 0.5rem;           
 }
