@@ -1,7 +1,8 @@
 import express from 'express';
-import Post from "../../models/post.js";
 import multer from "multer";
 import { v4 as uuidv4 } from "uuid";
+import Post from "../../models/post.js";
+import User from "../../models/user.js";
 
 var router = express.Router();
 
@@ -30,6 +31,9 @@ router.post("/new", upload.single("fileContent"), async (req, res) => {
         });
 
         await newPost.save();
+        await User.findByIdAndUpdate(userID, {
+            $push: { posts: newPost._id }
+        });
         res.status(201).json({ message: "Post saved successfully!", post: newPost });
     } catch (error) {
         res.status(500).json({ error: error.message });
