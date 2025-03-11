@@ -16,11 +16,13 @@ import EditPostPage from "./EditPostPage.jsx";
 import './App.css';
 import Feed from './Feed.jsx';
 
+const isUserLoggedIn = localStorage.getItem("user");
+console.log("currUser", isUserLoggedIn);
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
+          <Route index element={isUserLoggedIn ? <Feed /> : <Home />} />
           <Route path="/profile/:id" element={<ProfilePage />} />
           <Route path="/profile/edit" element={<ProfileEdit />} />
           <Route path="/login" element={<LoginPage />} />

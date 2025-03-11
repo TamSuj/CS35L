@@ -21,6 +21,8 @@ export default function PostListing({ post }) {
         )
     );
 
+    console.log("post",post?.tags);
+
     return (
         <div className="post-listing">
             <div className="post-listing-title">
