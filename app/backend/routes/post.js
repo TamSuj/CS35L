@@ -81,9 +81,12 @@ router.get("/:postId", async (req, res) => {
 router.delete("/:postId", async (req, res) => {
     const { postId } = req.params;
     try {
-        const deleted = await Post.findOneAndDelete({_id: postId});
-        if(deleted){
-            return res.status(200).json({message: "Post deleted successfully"});
+        const deletedPost = await Post.findOneAndDelete({ _id: postId });
+        if (deletedPost) {
+            await User.findByIdAndUpdate(deletedPost.userID, {
+                $pull: { posts: postId }
+            });
+            return res.status(200).json({ message: "Post deleted successfully" });
         } else {
             return res.status(404).json({ error: "Post not found"});
         }
