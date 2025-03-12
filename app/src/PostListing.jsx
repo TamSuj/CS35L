@@ -23,7 +23,6 @@ export default function PostListing({ post }) {
         )
     );
 
-    console.log("post",post?.tags);
     //console.log("post user",post?.userID);
 
     return (
