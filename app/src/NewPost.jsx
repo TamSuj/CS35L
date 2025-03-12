@@ -63,7 +63,7 @@ export default function NewPost() {
     
             const data = await response.json();
             console.log("Post saved successfully!");
-            navigate("/");
+            navigate("/")
             //alert("Post created successfully! Feel free to create another post or go back to the feed.");
             //console.log(data);
     

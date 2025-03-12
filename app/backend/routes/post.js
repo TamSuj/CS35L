@@ -199,5 +199,4 @@ router.put('/:postId/like', async (req, res) => {
     }
 });
 
-
 export default router;
