@@ -34,7 +34,7 @@ export default function PostPopup({ post, onClose }) {
                                                 <TagBar tagList={post.tags || []} />
                 </div> */}
                 <div className="like-button">
-                    <LikeButton postId={post._id} initialLikes={post.likeCount} />
+                    <LikeButton postId={post._id} initialLikes={post.likeCount} btnSize={"small"}/>
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@ import multer from "multer";
 import { v4 as uuidv4 } from "uuid";
 import Post from "../../models/post.js";
 import User from "../../models/user.js";
+import Tag from "../../models/tag.js";
 
 var router = express.Router();
 
@@ -16,6 +17,20 @@ const upload = multer({ storage });
 router.post("/new", upload.single("fileContent"), async (req, res) => {
     try {
         const { textContent, postTitle, userID, tag } = req.body;
+        let tagArray;
+        if (tag) {
+            //tagArray = tag.split(",");
+            //tagArray = Array.isArray(tag) ? tag : [tag];
+            tagArray = JSON.parse(tag);
+            console.log("tagArray",tagArray);
+            for (const tagName of tagArray) {
+                const existingTag = await Tag.findOne({ tagName });
+                if (!existingTag) {
+                    const newTag = new Tag({ tagName });
+                    await newTag.save();
+                }
+            }
+        }
 
         const newPost = new Post({
             postID: uuidv4(),
@@ -26,12 +41,12 @@ router.post("/new", upload.single("fileContent"), async (req, res) => {
             likeCount: 0,
             //comments: [],
             //tags: tags ? tags.split(",") : [],
-            tags: tag,
+            tags: tagArray,
             createdAt: new Date(),
             editedAt: new Date(),
         });
 
-        console.log("newPost", newPost);
+        //console.log("newPost", newPost);
 
         await newPost.save();
         await User.findByIdAndUpdate(userID, {
@@ -67,9 +82,12 @@ router.get("/:postId", async (req, res) => {
 router.delete("/:postId", async (req, res) => {
     const { postId } = req.params;
     try {
-        const deleted = await Post.findOneAndDelete({_id: postId});
-        if(deleted){
-            return res.status(200).json({message: "Post deleted successfully"});
+        const deletedPost = await Post.findOneAndDelete({ _id: postId });
+        if (deletedPost) {
+            await User.findByIdAndUpdate(deletedPost.userID, {
+                $pull: { posts: postId }
+            });
+            return res.status(200).json({ message: "Post deleted successfully" });
         } else {
             return res.status(404).json({ error: "Post not found"});
         }
@@ -173,6 +191,5 @@ router.put('/:postId/like', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
 
 export default router;

@@ -31,11 +31,13 @@ const ProfilePage = () => {
                 if (data.posts.length > 0) {
                     const postResponses = await Promise.all(
                         data.posts.map(postId =>
-                            fetch(`/api/post/${postId}`).then(res => res.json())
+                            fetch(`/api/post/${postId}`)
+                            .then(res => res.ok ? res.json() : null)
                         )
                     );
-                    setPosts(postResponses);
-                    setNoteCount(postResponses.length);
+                    const validPosts = postResponses.filter(post => post !== null);
+                    setPosts(validPosts);
+                    setNoteCount(validPosts.length);
                 }
             } catch (err) {
                 setError(err.message);
@@ -49,6 +51,7 @@ const ProfilePage = () => {
     // Handle logout
     const handleLogout = () => {
         localStorage.removeItem('user');
+        window.dispatchEvent(new Event("storage"));
         navigate('/login');
     };
 

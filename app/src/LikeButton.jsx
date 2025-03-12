@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-const LikeButton = ({ postId, initialLikes }) => {
+const LikeButton = ({ postId, initialLikes, btnSize, onClick }) => {
     const [likes, setLikes] = useState(initialLikes);
     const [liked, setLiked] = useState(false); 
 
@@ -31,7 +31,8 @@ const LikeButton = ({ postId, initialLikes }) => {
         fetchLikedState();
     }, [postId]); 
 
-    const handleLike = async () => {
+    const handleLike = async (e) => {
+        e.stopPropagation();
         const user = JSON.parse(localStorage.getItem('user'));
         if (!user || !user.id) {
             alert("You must be logged in to like a post.");
@@ -61,10 +62,10 @@ const LikeButton = ({ postId, initialLikes }) => {
 
     return (
         <div style={{ textAlign: 'center', cursor: 'pointer' }} onClick={handleLike}>
-            <span style={{ fontSize: '2rem' }}>
+            <span className={btnSize=="small" ? "like-button-heart-small" : "like-button-heart"}>
                 {liked ? '❤️' : '🤍'} 
             </span>
-            <div style={{ fontSize: '1rem', marginTop: '0.5rem' }}>
+            <div className={btnSize=="small" ? "like-button-text-small" : "like-button-text"}>
                 {likes} {likes === 1 ? 'like' : 'likes'} 
             </div>
         </div>

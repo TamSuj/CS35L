@@ -209,6 +209,12 @@
     text-decoration: underline;
 }
 
+.post-title-user-link {
+    text-decoration: underline;
+}
+
+
+
 /* POST POPUP */
 .popup-overlay {
     position: fixed;
@@ -408,4 +414,23 @@
     margin-top: 1rem;      
     flex-wrap: wrap;       
     gap: 0.5rem;           
+}
+
+/* LIKE BUTTON */
+.like-button-heart {
+    font-size: 2rem; 
+} 
+
+.like-button-heart-small {
+    font-size: 1.25rem;
+}
+
+.like-button-text {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+.like-button-text-small {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
 }

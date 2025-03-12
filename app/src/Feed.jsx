@@ -8,8 +8,7 @@ export default function Feed() {
     const [selectedPost, setSelectedPost] = useState(null);
     const [filteredPosts, setFilteredPosts] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("All");
-
-    const categories = ["All", "Math", "Science", "History", "English", "Computer Science", "Engineering"]; // Should be a list of all tags
+    const [categories, setCategories] = useState(["All"]); // Default
 
     useEffect(() => {
         fetch("/api/post/all")
@@ -21,13 +20,22 @@ export default function Feed() {
             .catch((error) => console.error("Error fetching posts:", error));
     }, []);
 
-    const filtered = (categorey) => {
-        setSelectedCategory(categorey);
-        if (categorey === "All") {
+    useEffect(() => {
+        fetch("/api/tag")
+            .then((res) => res.json())
+            .then((data) => {
+                setCategories(["All", ...data.map(data => data.tagName)]);
+            })
+            .catch((error) => console.error("Error fetching tags:", error))
+    }, []);
+
+    const filtered = (category) => {
+        setSelectedCategory(category);
+        if (category === "All") {
             setFilteredPosts(posts);
         }
         else {
-            setFilteredPosts(posts.filter(post => post.tags.includes(categorey)));
+            setFilteredPosts(posts.filter(post => post.tags.includes(category)));
         }
     };
 
@@ -37,8 +45,6 @@ export default function Feed() {
             <PostListing post={post} />
         </div>
     ))
-    console.log("selected post", selectedPost);
-
     return (
     <div className="feed-page bg-gray-100 p-4">
         <div className="filter-bar">
@@ -51,7 +57,7 @@ export default function Feed() {
         {filteredPosts.length === 0 && (
             <div className="flex justify-center items-center h-screen">
                 <p className="text-gray-700 text-lg font-medium">
-                    No "{selectedCategory}" posts found
+                    {selectedCategory == "All" ? "Posts are loading..." : `No ${selectedCategory} posts found`}
                 </p>
             </div>
         )}
