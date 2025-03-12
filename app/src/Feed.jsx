@@ -35,12 +35,7 @@ export default function Feed() {
             setFilteredPosts(posts);
         }
         else {
-            console.log(posts);
-            console.log(posts.filter((post) => {
-                post.tags
-            }));
             setFilteredPosts(posts.filter(post => post.tags.includes(category)));
-            console.log(filteredPosts);
         }
     };
 
