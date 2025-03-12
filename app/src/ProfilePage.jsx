@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaPen } from "react-icons/fa";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
-import { NoteGallery } from "./Note.jsx";
 import { TagBar } from "./Tag.jsx";
 import headshot from './assets/notion-face.png';
 import LogInRequired from "./LogInRequired.jsx";

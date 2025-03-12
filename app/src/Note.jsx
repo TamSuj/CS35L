@@ -20,16 +20,6 @@ export function Note({title, date, commentCount, likeCount}) {
     )
 }
 
-// export function NoteGallery({noteList}) {
-//     return(
-//         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-//             {noteList.map((note, index) => (
-//                 <Note key={note._id} title={note.postTitle} date={note.createdAt} commentCount={note.comments?.length} likeCount={note.likeCount}/>
-//             ))}
-//         </div>
-//     )
-// }
-
 export function NoteGallery({ noteList }) {
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

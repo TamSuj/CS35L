@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const ProfileEdit = () => {
     const [name, setName] = useState("");
     const [bio, setBio] = useState("");
     const [error, setError] = useState("");
     const [tag, setTag] = useState([]);
-    const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [userId, setUserId] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Get userId from localStorage or context
