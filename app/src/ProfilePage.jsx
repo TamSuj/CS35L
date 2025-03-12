@@ -49,6 +49,7 @@ const ProfilePage = () => {
     // Handle logout
     const handleLogout = () => {
         localStorage.removeItem('user');
+        window.dispatchEvent(new Event("storage"));
         navigate('/login');
     };
 
