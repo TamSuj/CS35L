@@ -7,6 +7,7 @@ export default function EditPostPage() {
     const [noteTitle, setNoteTitle] = React.useState("");
     const [noteText, setNoteText] = React.useState("");
     const [fileUploads, setFileUploads] = React.useState([]);
+    const [existingFile, setExistingFile] = React.useState(null);
     const { postId } = useParams();
     const navigate = useNavigate();
 
@@ -20,6 +21,10 @@ export default function EditPostPage() {
                 const data =  await response.json();
                 setNoteTitle(data.postTitle || '');
                 setNoteText(data.textContent || '');
+                if(data.fileContent)
+                {
+                    setExistingFile(data.fileContent);
+                }
             } catch(error) {
                 console.error("Error fetching post:", error);
                 alert("Failed to load post.");
@@ -40,7 +45,7 @@ export default function EditPostPage() {
         const newFiles = event.target.files;
         setFileUploads((fileUploads) => [...fileUploads, ...newFiles]);
     };
-
+    
     const handleSavePost = async () => {
         if (!noteText.trim()) {
             alert("Post content cannot be empty!");
@@ -58,6 +63,9 @@ export default function EditPostPage() {
         formData.append("postTitle", noteTitle);
         formData.append("textContent", noteText);
         fileUploads.forEach((file) => formData.append("fileContent", file));
+        if(existingFile){
+            formData.append("existingFile", existingFile);
+        }
         formData.append("userID", userId);
         formData.append("postId", postId);
     
@@ -119,11 +127,17 @@ export default function EditPostPage() {
             <div className="new-post-attachments">
                 <h3>Attachments</h3>
                 {
+                fileUploads.length > 0 ? (
                     fileUploads.map((file, index) => (
                         <div key={index} className="new-post-attachment">
                             {file.name}
                         </div>
                     ))
+                ): existingFile ? (
+                    <div className="new-post-attachment">
+                        <a href={existingFile} target="_blank" rel="noopener noreferrer">{existingFile}</a>
+                    </div>
+                ) : null
                 }
             </div>
         </div>

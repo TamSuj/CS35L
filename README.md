@@ -1,5 +1,14 @@
 # Studygram
 
+## Table of Contents
+- [Purpose](#purpose)
+- [Overview](#overview)
+  - [Architecture and Technologies](#architecture-and-technologies)
+- [Features](#features)
+- [How to run](#how-to-run)
+
+---
+
 ## Purpose
 
 Web app & online community for students to share study resources, tips, and connect with others.
@@ -16,7 +25,7 @@ Web app & online community for students to share study resources, tips, and conn
 ## Features
 
 ### Post
-- Creating post 
+- Create post
 - Edit/Delete post
 - View posts in feed
 - Upload file(s) to post
@@ -25,6 +34,7 @@ Web app & online community for students to share study resources, tips, and conn
 
 ### Profile page
 - Customize/Edit profile
+- View posts
 
 ### Search
 - Search for posts/people using tags
@@ -34,28 +44,7 @@ Web app & online community for students to share study resources, tips, and conn
 - Log in
 - Log out
 
-## Individual Contribution
-
-- Sonal Aggarwal
-- Gayvalin (Tammy) Sujaritchai
-- Megan Luu
-- Felicia Chen
-- Kento Goodman
-
-## Challenges
-
-XXX
-
-## Future Improvements
-
-- **Enhancements:**
-  - Consolidate API endpoints
-  - Optimize API calls
-- **Refactoring Opportunities:**
-  - Reorganize components
-  - Improve code readability
-- **Additional Features:**
-  - Comment on posts
+---
 
 ## How to run
 
@@ -66,11 +55,37 @@ npm install
 npm run dev
 ```
 
-In another terminal run:
+In another terminal, run:
 
 ```
 cd backend
 node server.js
 ```
+Note: Can't find the backend directory? Make sure you're in the `app` folder. Your directory structure should look something like this: `../CS35L/app/backend`
+
+
 
 ---
+
+## Contribution
+
+- Sonal Aggarwal
+- Gayvalin (Tammy) Sujaritchai
+- Megan Luu
+- Felicia Chen
+- Kento Goodman
+
+---
+
+## Future Improvements
+
+- **Enhancements:**
+  - Consolidate API endpoints
+  - Optimize API calls
+
+- **Refactoring Opportunities:**
+  - Reorganize components
+  - Improve code readability
+
+- **Additional Features:**
+  - Comment on posts  

@@ -55,7 +55,7 @@ export default function PostListing({ post }) {
                 }
             </div>
             <div className="post-listing-tags">
-                <TagBar tagList={post.tags || []} />
+                <TagBar tagList={post.tagObjects || []} showColor={true} />
             </div>
             <div className="like-button">
                     <LikeButton 

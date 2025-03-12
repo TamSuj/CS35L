@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { FaPen } from "react-icons/fa";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
-import { NoteGallery } from "./Note.jsx";
 import { TagBar } from "./Tag.jsx";
 import headshot from './assets/notion-face.png';
 import LogInRequired from "./LogInRequired.jsx";
 import PostPopup from "./PostPopup";
 import PostListing from "./PostListing.jsx";
+import DeleteButton from "./DeleteButton";
+import EditButton from './EditButton';
+import LikeButton from "./LikeButton";
 
 const ProfilePage = () => {
     const {id} = useParams();  // Get user ID from URL params
@@ -85,9 +87,26 @@ const ProfilePage = () => {
                         <p className="text-gray-600 text-sm">
                             {note.createdAt ? new Date(note.createdAt).toDateString() : "Unknown Date"}
                         </p>
-                        <div className="flex space-x-2 mt-2 text-gray-600 text-sm">
-                            <span>❤️ {note.likeCount || 0}</span>
-                            <span>💬 {note.comments?.length || 0}</span>
+                        <div className="flex items-center justify-between mt-2 text-gray-600 text-sm">
+                            {/* LikeButton on the left */}
+                            <div className="flex items-center space-x-2">
+                                <LikeButton 
+                                    postId={note._id}
+                                    variant="icon"
+                                />
+                            </div>
+        
+                            <div className="flex items-center space-x-4">
+                                <EditButton 
+                                    postId={note._id} 
+                                    variant="icon" 
+                                />
+                                <DeleteButton 
+                                    postId={note._id} 
+                                    variant="icon" 
+                                    onClick={(event) => handleDeleteClick(event)} 
+                                />
+                            </div>
                         </div>
                     </div>
                 ))}

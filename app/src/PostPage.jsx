@@ -5,6 +5,7 @@ import DeleteButton from "./DeleteButton";
 import EditButton from './EditButton';
 import LikeButton from "./LikeButton";
 import { TagBar } from "./Tag.jsx";
+import { Link } from "react-router-dom";
 
 export default function PostPage() {
     const { postId } = useParams();
@@ -20,10 +21,12 @@ export default function PostPage() {
 
     if (!post) return <p>Loading post...</p>;
 
+    console.log("post",post);
+
     return (
         <div className="post-page-wrapper">
             <div className="post-page">
-                <button onClick={() => navigate(-1)} className="post-page-back-button">← Back to Feed</button>
+                <button onClick={() => navigate(-1)} className="post-page-back-button">← Back</button>
                 <h2 className="post-page-title">{post.postTitle || "Untitled"}</h2>
                 <div className="post-page-body">
                     <div className="post-page-right">
@@ -39,7 +42,8 @@ export default function PostPage() {
                     <div className={post.fileContent? "post-page-left" : "post-page-text-only"}>
                         <div className="post-page-user-info">
                             <img src={NotionFace} className="post-page-pfp" />
-                            <p>{post.userID?.username || "Unknown User"}</p>
+                            { post.userID?.username ? <Link to={`/profile/${post.userID?._id}`} className="post-title-user-link">
+                            {post.userID?.username} </Link> : "Unknown User" }
                         </div>
                         {!post.fileContent && <hr className="post-page-hr" />}
                         <div className="post-page-text">
@@ -57,7 +61,7 @@ export default function PostPage() {
                 </div>
 
                 <div className="post-listing-tags">
-                    <TagBar tagList={post.tags || []} />
+                    <TagBar tagList={post.tagObjects || []} showColor={true} />
                 </div>
             </div>
         </div>
