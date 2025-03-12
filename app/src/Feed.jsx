@@ -8,7 +8,7 @@ export default function Feed() {
     const [selectedPost, setSelectedPost] = useState(null);
     const [filteredPosts, setFilteredPosts] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("All");
-    const [categories, setCategories] = useState(["All"]); // Default
+    const [categories, setCategories] = useState([{tagName: "All", color: "#4B5563"}]); // Default
 
     useEffect(() => {
         fetch("/api/post/all")
@@ -24,18 +24,22 @@ export default function Feed() {
         fetch("/api/tag")
             .then((res) => res.json())
             .then((data) => {
-                setCategories(["All", ...data.map(data => data.tagName)]);
+                console.log(data)
+                setCategories([{ tagName: "All", color: "#4B5563" }, ...data.map(data => ({ 
+                    tagName: data.tagName, 
+                    color: data.color 
+                }))]);
             })
             .catch((error) => console.error("Error fetching tags:", error))
     }, []);
 
     const filtered = (category) => {
-        setSelectedCategory(category);
-        if (category === "All") {
+        setSelectedCategory(category.tagName);
+        if (category.tagName === "All") {
             setFilteredPosts(posts);
         }
         else {
-            setFilteredPosts(posts.filter(post => post.tags.includes(category)));
+            setFilteredPosts(posts.filter(post => post.tags.includes(category.tagName)));
         }
     };
 
@@ -49,8 +53,8 @@ export default function Feed() {
     <div className="feed-page bg-gray-100 p-4">
         <div className="filter-bar">
             {categories.map((category, index) => (
-                <button key={index} onClick={() => filtered(category)} className={"p-2 px-4 mt-2 ml-2 text-white rounded-full " + (category == selectedCategory ? "bg-gray-600" : "bg-black")}>
-                    {category}
+                <button key={index} onClick={() => filtered(category)} className={"p-2 px-4 mt-2 ml-2 text-white rounded-full"} style={{ backgroundColor: category.tagName === selectedCategory ? category.color : "#000000"}}>
+                    {category.tagName}
                 </button>
             ))}
         </div>

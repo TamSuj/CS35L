@@ -23,7 +23,6 @@ export default function PostListing({ post }) {
         )
     );
 
-    console.log("post",post);
     //console.log("post user",post?.userID);
 
     return (
