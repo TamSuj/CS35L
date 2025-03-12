@@ -2,6 +2,7 @@ import React from 'react';
 import NotionFace from "./assets/notion-face.png";
 import { Link } from "react-router-dom";
 import { TagBar } from "./Tag.jsx";
+import LikeButton from "./LikeButton.jsx";
 
 export default function PostListing({ post }) {
     const filePreview = post.fileContent && (
@@ -55,6 +56,9 @@ export default function PostListing({ post }) {
             <div className="post-listing-tags">
                 <TagBar tagList={post.tags || []} />
             </div>
+            <div className="like-button">
+                    <LikeButton postId={post._id} initialLikes={post.likeCount} />
+                </div>
         </div>
     )
 }
