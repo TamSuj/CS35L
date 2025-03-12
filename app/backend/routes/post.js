@@ -61,7 +61,12 @@ router.post("/new", upload.single("fileContent"), async (req, res) => {
 router.get("/all", async (req, res) => {
     try {
         const posts = await Post.find().populate("userID", "username");
-        res.json(posts);
+        const postsWithTags = await Promise.all(posts.map(async (post) => {
+            const postObj = post.toObject(); // Convert to plain object
+            postObj.tagObjects = await Tag.find({ tagName: { $in: post.tags } });
+            return postObj;
+        }));
+        res.json(postsWithTags);
     } catch (error) {
         console.error("Error fetching posts:", error);
         res.status(500).json({ error: "Failed to fetch posts" });
@@ -72,7 +77,9 @@ router.get("/:postId", async (req, res) => {
     try {
         const post = await Post.findById(req.params.postId).populate("userID", "username");
         if (!post) return res.status(404).json({ error: "Post not found" });
-        res.json(post);
+        const postObj = post.toObject();
+        postObj.tagObjects = await Tag.find({ tagName: { $in: post.tags } });
+        res.json(postObj);
     } catch (error) {
         console.error("Error fetching post:", error);
         res.status(500).json({ error: "Failed to fetch post" });

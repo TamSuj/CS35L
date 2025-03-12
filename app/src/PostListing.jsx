@@ -23,7 +23,7 @@ export default function PostListing({ post }) {
         )
     );
 
-    console.log("post",post?.tags);
+    console.log("post",post);
     //console.log("post user",post?.userID);
 
     return (
@@ -56,7 +56,7 @@ export default function PostListing({ post }) {
                 }
             </div>
             <div className="post-listing-tags">
-                <TagBar tagList={post.tags || []} />
+                <TagBar tagList={post.tagObjects || []} showColor={true} />
             </div>
             <div className="like-button">
                     <LikeButton 

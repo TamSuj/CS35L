@@ -28,7 +28,8 @@ export default function PostPopup({ post, onClose }) {
                             height="400px"
                         />
                     )}
-                    <TagBar tagList={post.tags || []} />
+                    {/* <TagBar tagList={post.tags || []} /> */}
+                    <TagBar tagList={post.tagObjects || []} showColor={true} />
                 </div>
                 {/* <div className="post-listing-tags">
                                                 <TagBar tagList={post.tags || []} />

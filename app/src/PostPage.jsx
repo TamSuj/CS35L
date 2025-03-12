@@ -20,6 +20,8 @@ export default function PostPage() {
 
     if (!post) return <p>Loading post...</p>;
 
+    console.log("post",post);
+
     return (
         <div className="post-page-wrapper">
             <div className="post-page">
@@ -57,7 +59,7 @@ export default function PostPage() {
                 </div>
 
                 <div className="post-listing-tags">
-                    <TagBar tagList={post.tags || []} />
+                    <TagBar tagList={post.tagObjects || []} showColor={true} />
                 </div>
             </div>
         </div>
