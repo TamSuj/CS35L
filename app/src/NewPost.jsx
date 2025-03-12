@@ -1,6 +1,7 @@
 import React from 'react';
 import fileUploadIcon from "./assets/file-upload-icon.svg";
 import NewPostHeader from './NewPostHeader.jsx';
+import {useNavigate} from 'react-router-dom';
 
 export default function NewPost() {
     const [noteTitle, setNoteTitle] = React.useState("");
@@ -61,7 +62,8 @@ export default function NewPost() {
     
             const data = await response.json();
             console.log("Post saved successfully!");
-            alert("Post created successfully! Feel free to create another post or go back to the feed.");
+            navigate("/");
+            //alert("Post created successfully! Feel free to create another post or go back to the feed.");
             //console.log(data);
     
             // Clear the form after saving

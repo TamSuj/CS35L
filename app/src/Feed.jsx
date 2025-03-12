@@ -51,7 +51,7 @@ export default function Feed() {
         {filteredPosts.length === 0 && (
             <div className="flex justify-center items-center h-screen">
                 <p className="text-gray-700 text-lg font-medium">
-                    No "{selectedCategory}" posts found
+                    {selectedCategory == "All" ? "Posts are loading..." : `No ${selectedCategory} posts found`}
                 </p>
             </div>
         )}

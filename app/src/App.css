@@ -209,6 +209,12 @@
     text-decoration: underline;
 }
 
+.post-title-user-link {
+    text-decoration: underline;
+}
+
+
+
 /* POST POPUP */
 .popup-overlay {
     position: fixed;

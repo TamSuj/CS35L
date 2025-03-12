@@ -24,6 +24,7 @@ export default function PostListing({ post }) {
     );
 
     console.log("post",post?.tags);
+    //console.log("post user",post?.userID);
 
     return (
         <div className="post-listing">
@@ -37,7 +38,8 @@ export default function PostListing({ post }) {
             </div>
             <div className="post-listing-user-info">
                 <img src={NotionFace} alt="user avatar" className="post-listing-pfp"></img>
-                { post.userID?.username || "Unknown User" }
+                { post.userID?.username ? <Link to={`/profile/${post.userID?._id}`} className="post-title-user-link">
+                {post.userID?.username} </Link> : "Unknown User" }
             </div>
             <div className="post-listing-body">
                 {filePreview ?
