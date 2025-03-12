@@ -5,16 +5,18 @@ import { NoteGallery } from "./Note.jsx";
 import { TagBar } from "./Tag.jsx";
 import headshot from './assets/notion-face.png';
 import LogInRequired from "./LogInRequired.jsx";
+import PostPopup from "./PostPopup";
+import PostListing from "./PostListing.jsx";
 
 const ProfilePage = () => {
-    const { id } = useParams();  // Get user ID from URL params
+    const {id} = useParams();  // Get user ID from URL params
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [Posts, setPosts] = useState([]);
     const [noteCount, setNoteCount] = useState(0);
     const navigate = useNavigate();
-
+    const [selectedPost, setSelectedPost] = useState(null);
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -40,7 +42,6 @@ const ProfilePage = () => {
             }
             setLoading(false);
         };
-
         fetchUserProfile();
     }, [id]);
 
@@ -50,6 +51,12 @@ const ProfilePage = () => {
         localStorage.removeItem('user');
         navigate('/login');
     };
+
+    const postListings = Posts.map((post) => (
+        <div key={post._id} onClick={() => setSelectedPost(post)}>
+            <PostListing post={post}/>
+        </div>
+    ))
 
     if (loading) {
         return <div className="flex items-center justify-center p-4 bg-gray-100 rounded-lg shadow-md">
@@ -69,7 +76,7 @@ const ProfilePage = () => {
         return (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {notes.map((note) => (
-                    <div key={note.postID} className="bg-gray-100 p-4 rounded-lg">
+                    <div key={note.postID} onClick={() => setSelectedPost(note)} className="bg-gray-100 p-4 rounded-lg">
                         <div className="text-gray-800 text-2xl">📄</div>
                         <p className="mt-2 font-semibold text-gray-800">{note.postTitle}</p>
                         <p className="text-gray-600 text-sm">
@@ -89,13 +96,13 @@ const ProfilePage = () => {
         const achievements = [];
 
         if (noteCount >= 5) {
-            achievements.push({ icon: "🏆", title: "Top Contributor" });
+            achievements.push({icon: "🏆", title: "Top Contributor"});
         }
         if (stats?.followerCount >= 10) {
-            achievements.push({ icon: "🤝", title: "Community Moderator" });
+            achievements.push({icon: "🤝", title: "Community Moderator"});
         }
-        if (stats?.noteCount >= 30) {
-            achievements.push({ icon: "🔥", title: `Study Streak: ${stats?.noteCount} days` });
+        if (noteCount >= 30) {
+            achievements.push({icon: "🔥", title: `Study Streak: ${noteCount} days`});
         }
 
         return achievements;
@@ -108,14 +115,14 @@ const ProfilePage = () => {
             <div className="p-1"></div>
             <section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow mt-6">
                 <div className="flex items-center space-x-6">
-                    <img className="w-24 h-24 rounded-full " src={user.profilePic || headshot} alt="Profile" />
+                    <img className="w-24 h-24 rounded-full " src={user.profilePic || headshot} alt="Profile"/>
                     <div className="flex-1">
                         <div className="flex mb-2">
                             <h2 className="text-2xl font-semibold text-gray-800">{user.name || "Unnamed User"}</h2>
-                            <button className="pl-2" onClick={() => navigate('/profile/edit')}><FaPen /></button>
+                            <button className="pl-2" onClick={() => navigate('/profile/edit')}><FaPen/></button>
                         </div>
                         <p className="text-gray-600">{user.bio}</p>
-                        <TagBar tagList={user.tags || []} />
+                        <TagBar tagList={user.tags || []}/>
                     </div>
                     <div className="text-right">
                         <p className="text-gray-700"><strong>{noteCount || 0}</strong> Notes</p>
@@ -149,6 +156,11 @@ const ProfilePage = () => {
                 <h3 className="text-xl font-semibold text-gray-800 mb-4">Study Notes</h3>
                 {renderNotes(Posts)}
             </section>
+            <div className="feed-page-content">
+                {selectedPost && (
+                    <PostPopup post={selectedPost} onClose={() => setSelectedPost(null)}/>
+                )}
+            </div>
         </div>
     );
 };

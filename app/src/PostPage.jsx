@@ -4,6 +4,7 @@ import NotionFace from "./assets/notion-face.png";
 import DeleteButton from "./DeleteButton";
 import EditButton from './EditButton';
 import LikeButton from "./LikeButton";
+import { TagBar } from "./Tag.jsx";
 
 export default function PostPage() {
     const { postId } = useParams();
@@ -53,6 +54,10 @@ export default function PostPage() {
 
                 <div className="like-button">
                     <LikeButton postId={post._id} initialLikes={post.likeCount} />
+                </div>
+
+                <div className="post-listing-tags">
+                    <TagBar tagList={post.tags || []} />
                 </div>
             </div>
         </div>

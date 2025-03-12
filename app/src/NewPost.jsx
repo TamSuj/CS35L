@@ -6,6 +6,7 @@ export default function NewPost() {
     const [noteTitle, setNoteTitle] = React.useState("");
     const [noteText, setNoteText] = React.useState("");
     const [fileUploads, setFileUploads] = React.useState([]);
+    const [tag, setTag] = React.useState([]);
 
     const handleTitleChange = (event) => {
         setNoteTitle(event.target.value);
@@ -38,6 +39,7 @@ export default function NewPost() {
         formData.append("textContent", noteText);
         fileUploads.forEach((file) => formData.append("fileContent", file));
         formData.append("userID", userId);
+        formData.append("tag", tag);
     
         try {
             const response = await fetch("/api/post/new", {
@@ -108,6 +110,15 @@ export default function NewPost() {
                     ))
                 }
             </div>
+            <h3>Add Tags</h3>
+            <input
+                            type="text"
+                            id="tags"
+                            value={tag.join(", ")}
+                            onChange={(e) => setTag(e.target.value.split(",").map(t => t.trim()))}
+                            className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            placeholder="e.g., AI, Web Dev, UI/UX"
+            />
         </div>
     </div>
     </>
