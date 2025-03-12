@@ -20,6 +20,8 @@ const ProfilePage = () => {
     const navigate = useNavigate();
     const [selectedPost, setSelectedPost] = useState(null);
 
+    const currUser = JSON.parse(localStorage.getItem("user"));
+
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
@@ -141,7 +143,11 @@ const ProfilePage = () => {
                     <div className="flex-1">
                         <div className="flex mb-2">
                             <h2 className="text-2xl font-semibold text-gray-800">{user.name || "Unnamed User"}</h2>
+                            { currUser.id === user.id ? (
                             <button className="pl-2" onClick={() => navigate('/profile/edit')}><FaPen/></button>
+                            ) : (
+                                <></>
+                            )}
                         </div>
                         <p className="text-gray-600">{user.bio}</p>
                         <TagBar tagList={user.tags || []}/>
@@ -150,11 +156,15 @@ const ProfilePage = () => {
                         <p className="text-gray-700"><strong>{noteCount || 0}</strong> Notes</p>
                         <p className="text-gray-700"><strong>{user.stats?.followerCount || 0}</strong> Followers</p>
                         <p className="text-gray-700"><strong>{user.stats?.followingCount || 0}</strong> Following</p>
-                        <button
+                        { currUser.id === user.id ? (
+                            <button
                             onClick={handleLogout}
                             className="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
                         >Log Out
                         </button>
+                        ) : (
+                            <></>
+                        )}
                     </div>
                 </div>
             </section>
