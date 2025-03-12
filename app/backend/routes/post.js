@@ -3,6 +3,7 @@ import multer from "multer";
 import { v4 as uuidv4 } from "uuid";
 import Post from "../../models/post.js";
 import User from "../../models/user.js";
+import Tag from "../../models/tag.js";
 
 var router = express.Router();
 
@@ -16,6 +17,19 @@ const upload = multer({ storage });
 router.post("/new", upload.single("fileContent"), async (req, res) => {
     try {
         const { textContent, postTitle, userID, tag } = req.body;
+        if (tag) {
+            //tagArray = tag.split(",");
+            //tagArray = Array.isArray(tag) ? tag : [tag];
+            let tagArray = JSON.parse(tag);
+            console.log("tagArray",tagArray);
+            for (const tagName of tagArray) {
+                const existingTag = await Tag.findOne({ tagName });
+                if (!existingTag) {
+                    const newTag = new Tag({ tagName });
+                    await newTag.save();
+                }
+            }
+        }
 
         const newPost = new Post({
             postID: uuidv4(),
@@ -31,7 +45,7 @@ router.post("/new", upload.single("fileContent"), async (req, res) => {
             editedAt: new Date(),
         });
 
-        console.log("newPost", newPost);
+        //console.log("newPost", newPost);
 
         await newPost.save();
         await User.findByIdAndUpdate(userID, {
