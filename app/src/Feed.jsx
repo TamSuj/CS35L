@@ -8,8 +8,7 @@ export default function Feed() {
     const [selectedPost, setSelectedPost] = useState(null);
     const [filteredPosts, setFilteredPosts] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("All");
-
-    const categories = ["All", "Math", "Science", "History", "English", "Computer Science", "Engineering"]; // Should be a list of all tags
+    const [categories, setCategories] = useState(["All"]); // Default
 
     useEffect(() => {
         fetch("/api/post/all")
@@ -20,6 +19,16 @@ export default function Feed() {
             })
             .catch((error) => console.error("Error fetching posts:", error));
     }, []);
+
+    useEffect(() => {
+        fetch("/api/tag")
+            .then((res) => res.json())
+            .then((data) => {
+                setCategories(["All", ...data.map(data => data.tagName)]);
+            })
+            .catch((error) => console.error("Error fetching tags:", error))
+    }, []);
+    console.log(categories);
 
     const filtered = (categorey) => {
         setSelectedCategory(categorey);
@@ -37,8 +46,6 @@ export default function Feed() {
             <PostListing post={post} />
         </div>
     ))
-    console.log("selected post", selectedPost);
-
     return (
     <div className="feed-page bg-gray-100 p-4">
         <div className="filter-bar">

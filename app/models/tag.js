@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const tagSchema = new mongoose.Schema(
   {
-    tagName: { type: String, default: null },
+    tagName: { type: String, default: "" },
   },
   { collection: "tag" }
 );

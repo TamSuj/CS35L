@@ -10,6 +10,7 @@ import cors from 'cors';
 import { fileURLToPath } from "url";
 import profileUpdate from "./routes/profileUpdate.js";
 import users from "./routes/users.js";
+import tag from "./routes/tag.js";
 
 dotenv.config({ path: "../../.env" }); // load in database and port
 const app = express();
@@ -56,6 +57,7 @@ app.use("/api/search", search);
 app.use("/uploads", express.static("uploads"));
 app.use("/api/profile/update", profileUpdate)
 app.use("/api/user", users);
+app.use("/api/tag", tag);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
