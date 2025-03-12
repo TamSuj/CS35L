@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 const ProfileEdit = () => {
     const [name, setName] = useState("");
     const [bio, setBio] = useState("");
     const [error, setError] = useState("");
     const [tag, setTag] = useState([]);
-    const [userId, setUserId] = useState(null);  // New state for userId
     const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+    const [userId, setUserId] = useState(null);
 
     useEffect(() => {
         // Get userId from localStorage or context
         const user = JSON.parse(localStorage.getItem("user"));
-        if (user && user.id) {
-            setUserId(user.id);
-        }
+        setUser(user);
+        setUserId(user.id);
+        setName(user.name || '');
+        setBio(user.bio || '');
+        setTag(user.tags || []);
     }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!userId) {
+        if (!user) {
             setError("User not logged in.");
             return;
         }
@@ -83,7 +86,7 @@ const ProfileEdit = () => {
                                value={bio}
                                onChange={(e) => setBio(e.target.value)}
                                className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                               placeholder="Aspiring coffee-fueled scholar"/>
+                               placeholder={{bio} || "Aspiring Academic Weapon"}/>
                     </div>
                     <div className="mb-6">
                         <label htmlFor="interest"
