@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-const DeleteButton = ({ postId }) => {
+const DeleteButton = ({ postId, variant, onClick }) => {
     const [isPoster, setIsPoster] = useState(false);
     const [confirmation, setConfirmation] = useState(false);
     useEffect(() => {
@@ -32,7 +32,8 @@ const DeleteButton = ({ postId }) => {
         fetchIsPoster();
     }, [postId]);
 
-    const handleDelete = async() => {
+    const handleDelete = async(event) => {
+        event.stopPropagation();
         const user = JSON.parse(localStorage.getItem('user'));
         if(!user || !user.id){
             return; //error
@@ -61,11 +62,28 @@ const DeleteButton = ({ postId }) => {
         }
     };
     if (!isPoster) return null;
+
     return (
-        <button className = "delete-button" onClick = { handleDelete }>
-            {confirmation ? 'Are you sure?' : 'Delete Post'}
-        </button>
-    )
+        <>
+            {variant === 'icon' ? (
+                <button
+                    className="delete-button-icon"
+                    onClick={handleDelete}
+                    title="Delete Post"
+                >
+                    {confirmation ? '❓' : '🗑️'} 
+                </button>
+            ) : (
+                <button
+                    className="delete-button"
+                    onClick={handleDelete}
+                    title="Delete Post"
+                >
+                    {confirmation ? 'Are you sure?' : 'Delete Post'}
+                </button>
+            )}
+        </>
+    );
 };
 
 export default DeleteButton;

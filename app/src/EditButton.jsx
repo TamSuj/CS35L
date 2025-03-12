@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 
-const EditButton = ({ postId }) => {
+const EditButton = ({ postId, variant }) => {
     const [isPoster, setIsPoster] = useState(false);
     const navigate = useNavigate();
     useEffect(() => {
@@ -33,18 +33,25 @@ const EditButton = ({ postId }) => {
         };
         fetchIsPoster();
     }, [postId]);
-    const handleEdit = async() => {
+    const handleEdit = async(event) => {
+        event.stopPropagation();
          navigate(`/post/${postId}/edit`);
     }
     if(!isPoster)
     {
         return null;
     }
-    return(
-        <button onClick={handleEdit} className="edit-button">
-            Edit Post
-        </button>
-    )
+    return (
+        <>
+            {variant === 'icon' ? (
+                <button onClick={handleEdit}>✏️</button>
+            ) : (
+                <button onClick={handleEdit} className="edit-button">
+                Edit Post
+                </button>
+            )}
+        </>
+    );
 };
 
 export default EditButton;

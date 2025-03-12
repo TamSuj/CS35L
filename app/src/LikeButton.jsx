@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-const LikeButton = ({ postId, initialLikes, btnSize, onClick }) => {
+const LikeButton = ({ postId, initialLikes, btnSize, onClick, variant }) => {
     const [likes, setLikes] = useState(initialLikes);
     const [liked, setLiked] = useState(false); 
 
@@ -61,14 +61,36 @@ const LikeButton = ({ postId, initialLikes, btnSize, onClick }) => {
     };
 
     return (
-        <div style={{ textAlign: 'center', cursor: 'pointer' }} onClick={handleLike}>
-            <span className={btnSize=="small" ? "like-button-heart-small" : "like-button-heart"}>
-                {liked ? '❤️' : '🤍'} 
-            </span>
-            <div className={btnSize=="small" ? "like-button-text-small" : "like-button-text"}>
-                {likes} {likes === 1 ? 'like' : 'likes'} 
-            </div>
-        </div>
+        <>
+             {variant === "icon" ? (
+                 <div 
+                     style={{ textAlign: 'center', cursor: 'pointer' }} 
+                     onClick={handleLike}
+                     className="flex items-center space-x-2"
+                 >
+                     <span className="like-button-heart-icon">
+                         <span style={{ color: liked ? 'red' : 'white' }}>
+                             {liked ? '❤️' : '🤍'} 
+                         </span>
+                     </span>
+                     <div className={"like-button-text-small"}>
+                         {likes}
+                     </div>
+                 </div>
+             ) : (
+                 <div 
+                     style={{ textAlign: 'center', cursor: 'pointer' }} 
+                     onClick={handleLike}
+                 >
+                     <span className={btnSize === "small" ? "like-button-heart-small" : "like-button-heart"}>
+                         {liked ? '❤️' : '🤍'} 
+                     </span>
+                     <div className={btnSize === "small" ? "like-button-text-small" : "like-button-text"}>
+                         {likes} {likes === 1 ? 'like' : 'likes'} 
+                     </div>
+                 </div>
+             )}
+         </>
     );
 };
 

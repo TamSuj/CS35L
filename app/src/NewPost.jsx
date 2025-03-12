@@ -8,6 +8,7 @@ export default function NewPost() {
     const [noteText, setNoteText] = React.useState("");
     const [fileUploads, setFileUploads] = React.useState([]);
     const [tag, setTag] = React.useState("");
+    const navigate = useNavigate();
 
     const handleTitleChange = (event) => {
         setNoteTitle(event.target.value);
