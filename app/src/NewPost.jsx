@@ -1,6 +1,7 @@
 import React from 'react';
 import fileUploadIcon from "./assets/file-upload-icon.svg";
 import NewPostHeader from './NewPostHeader.jsx';
+import {useNavigate} from 'react-router-dom';
 
 export default function NewPost() {
     const [noteTitle, setNoteTitle] = React.useState("");
@@ -43,7 +44,10 @@ export default function NewPost() {
         tagArray = tag.split(",");
         tagArray = tagArray.map(t => t.trim());
         console.log("tagArray",tagArray);
-        formData.append("tag", JSON.stringify(tagArray));
+        if (tag) {
+            formData.append("tag", JSON.stringify(tagArray));
+        }
+        
         
     
         try {
@@ -58,12 +62,15 @@ export default function NewPost() {
     
             const data = await response.json();
             console.log("Post saved successfully!");
-            console.log(data);
+            navigate("/");
+            //alert("Post created successfully! Feel free to create another post or go back to the feed.");
+            //console.log(data);
     
             // Clear the form after saving
             setNoteTitle("");
             setNoteText("");
             setFileUploads([]);
+            setTag("");
         } catch (error) {
             console.error("Error saving post:", error);
             alert("Failed to save post.");

@@ -17,10 +17,11 @@ const upload = multer({ storage });
 router.post("/new", upload.single("fileContent"), async (req, res) => {
     try {
         const { textContent, postTitle, userID, tag } = req.body;
+        let tagArray;
         if (tag) {
             //tagArray = tag.split(",");
             //tagArray = Array.isArray(tag) ? tag : [tag];
-            let tagArray = JSON.parse(tag);
+            tagArray = JSON.parse(tag);
             console.log("tagArray",tagArray);
             for (const tagName of tagArray) {
                 const existingTag = await Tag.findOne({ tagName });
@@ -40,7 +41,7 @@ router.post("/new", upload.single("fileContent"), async (req, res) => {
             likeCount: 0,
             //comments: [],
             //tags: tags ? tags.split(",") : [],
-            tags: tag,
+            tags: tagArray,
             createdAt: new Date(),
             editedAt: new Date(),
         });
