@@ -28,15 +28,19 @@ export default function Feed() {
             })
             .catch((error) => console.error("Error fetching tags:", error))
     }, []);
-    console.log(categories);
 
-    const filtered = (categorey) => {
-        setSelectedCategory(categorey);
-        if (categorey === "All") {
+    const filtered = (category) => {
+        setSelectedCategory(category);
+        if (category === "All") {
             setFilteredPosts(posts);
         }
         else {
-            setFilteredPosts(posts.filter(post => post.tags.includes(categorey)));
+            console.log(posts);
+            console.log(posts.filter((post) => {
+                post.tags
+            }));
+            setFilteredPosts(posts.filter(post => post.tags.includes(category)));
+            console.log(filteredPosts);
         }
     };
 
