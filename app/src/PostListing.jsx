@@ -57,7 +57,12 @@ export default function PostListing({ post }) {
                 <TagBar tagList={post.tags || []} />
             </div>
             <div className="like-button">
-                    <LikeButton postId={post._id} initialLikes={post.likeCount} />
+                    <LikeButton 
+                        postId={post._id} 
+                        initialLikes={post.likeCount} 
+                        btnSize={"small"} 
+                        onClick={(e) => e.stopPropagation()}
+                    />
                 </div>
         </div>
     )

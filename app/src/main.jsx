@@ -1,4 +1,5 @@
-import { StrictMode } from 'react'
+import { StrictMode } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import Home from "./Home.jsx";
@@ -16,10 +17,23 @@ import EditPostPage from "./EditPostPage.jsx";
 import './App.css';
 import Feed from './Feed.jsx';
 
-const isUserLoggedIn = localStorage.getItem("user");
-console.log("currUser", isUserLoggedIn);
-createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
+function App() {
+  const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(!!localStorage.getItem("user"));
+
+  React.useEffect(() => {
+    const handleStorageChange = () => {
+      setIsUserLoggedIn(!!localStorage.getItem("user"));
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
+  return (
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={isUserLoggedIn ? <Feed /> : <Home />} />
@@ -35,5 +49,8 @@ createRoot(document.getElementById('root')).render(
           <Route path="/post/:postId/edit" element={<EditPostPage />} />
         </Route>
       </Routes>
-    </BrowserRouter>,
-)
+    </BrowserRouter>
+  );
+}
+
+createRoot(document.getElementById('root')).render(<App />);
