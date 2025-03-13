@@ -49,7 +49,7 @@ const DeleteButton = ({ postId, variant, onClick }) => {
                     });
                 if (response.ok){
                     alert('Post deleted successfully.');
-                    window.location.href = '/feed';
+                    (variant === 'icon') ? (window.location.reload()) : (window.location.href = '/feed');
                 } else {
                     alert('Error deleting the post.');
                 }
@@ -61,6 +61,7 @@ const DeleteButton = ({ postId, variant, onClick }) => {
             setConfirmation(true);
         }
     };
+
     if (!isPoster) return null;
 
     return (
