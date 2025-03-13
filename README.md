@@ -50,6 +50,7 @@ Web app & online community for students to share study resources, tips, and conn
 
 ```
 git clone https://github.com/TamSuj/CS35L.git
+cd CS35L
 cd app
 npm install
 npm run dev
@@ -58,7 +59,7 @@ npm run dev
 In another terminal, run:
 
 ```
-cd backend
+cd CS35L/app/backend
 node server.js
 ```
 Note: Can't find the backend directory? Make sure you're in the `app` folder. Your directory structure should look something like this: `../CS35L/app/backend`
