@@ -15,10 +15,10 @@ export function Tag({ tag, color }) {
     className={color ? 
         "text-sm px-3 py-1 mt-3 rounded-full" : 
         "bg-gray-200 text-gray-700 text-sm px-3 py-1 mt-3 rounded-full"}
-        style={{ 
-            backgroundColor: color,
-            color: isDarkColor ? "white" : "black"
-        }}
+    style={{ 
+        backgroundColor: color,
+        color: (isDarkColor && color) ? "white" : "black"
+    }}
     >
     {tag}
 </span>
