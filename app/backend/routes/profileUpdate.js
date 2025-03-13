@@ -1,6 +1,4 @@
 import express from "express";
-import mongoose from "mongoose";
-// import userSchema from "../../models/user.js";
 import User from "../../models/user.js";
 
 const router = express.Router();
@@ -8,14 +6,11 @@ const router = express.Router();
 // Update user profile
 router.put("/", async (req, res) => {
   try {
-    const { name, bio, tag, userId } = req.body;
+    const { name, bio, tags, userId } = req.body;
 
-    // Directly use userId passed in the body
     if (!userId) {
       return res.status(400).json({ error: "User ID is required" });
     }
-
-    // const User = mongoose.models.User || mongoose.model("User", userSchema);
 
     // Find user by ID and update
     const updatedUser = await User.findByIdAndUpdate(
@@ -23,7 +18,7 @@ router.put("/", async (req, res) => {
         {
           name: name,
           bio: bio,
-          tags: tag, // [ { tagName: 'tag1' }, { tagName: 'tag2' } ]
+          tags: tags, // [ { tagName: 'tag1' }, { tagName: 'tag2' } ]
         },
         { new: true } // Return updated document
     );
