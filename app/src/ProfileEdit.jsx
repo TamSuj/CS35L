@@ -5,19 +5,33 @@ const ProfileEdit = () => {
     const [name, setName] = useState("");
     const [bio, setBio] = useState("");
     const [error, setError] = useState("");
-    const [tag, setTag] = useState([]);
+    const [tags, setTags] = useState([]);
     const [user, setUser] = useState(null);
     const [userId, setUserId] = useState(null);
     const navigate = useNavigate();
 
+
     useEffect(() => {
-        // Get userId from localStorage or context
         const user = JSON.parse(localStorage.getItem("user"));
-        setUser(user);
-        setUserId(user.id);
-        setName(user.name || '');
-        setBio(user.bio || '');
-        setTag(user.tags || []);
+
+        const fetchUserProfile = async () => {
+            try {
+                const response = await fetch(`/api/user/${user.id}`);
+                if (!response.ok) {
+                    throw new Error("User not found");
+                }
+                const data = await response.json();
+                setUser(data);
+                setUserId(user.id);
+                setName(data.name || '');
+                setBio(data.bio || '');
+                setTags(data.tags || []);
+                console.log(data);
+            } catch (err) {
+                setError(err.message);
+            }
+        };
+        fetchUserProfile();
     }, []);
 
     const handleSubmit = async (e) => {
@@ -30,18 +44,18 @@ const ProfileEdit = () => {
 
         try {
             const token = localStorage.getItem("token");
-
             const response = await fetch('/api/profile/update', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
+
                 body: JSON.stringify({
                     userId,
                     name,
                     bio,
-                    tag,
+                    tags,
                 })
             });
 
@@ -54,7 +68,7 @@ const ProfileEdit = () => {
                 ...JSON.parse(localStorage.getItem('user')),
                 name,
                 bio,
-                tags: tag,
+                tags,
             };
             localStorage.setItem('user', JSON.stringify(updatedUser));
 
@@ -86,7 +100,7 @@ const ProfileEdit = () => {
                                value={bio}
                                onChange={(e) => setBio(e.target.value)}
                                className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                               placeholder={{bio} || "Aspiring Academic Weapon"}/>
+                               placeholder={"Aspiring Academic Weapon"}/>
                     </div>
                     <div className="mb-6">
                         <label htmlFor="interest"
@@ -94,8 +108,9 @@ const ProfileEdit = () => {
                         <input
                             type="text"
                             id="tags"
-                            value={tag.join(", ")}
-                            onChange={(e) => setTag(e.target.value.split(",").map(t => t.trim()))}
+                            value={tags.join(", ")}
+                            // onChange={(e) => setTags(e.target.value.split(",").map(t => t.trim()))}
+                            onChange={(e) => setTags(e.target.value.split(",").map(t => t.trim()))}
                             className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                             placeholder="e.g., AI, Web Dev, UI/UX"
                         />
