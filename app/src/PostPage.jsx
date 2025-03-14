@@ -23,6 +23,24 @@ export default function PostPage() {
 
     console.log("post",post);
 
+    const filePreview = post.fileContent && (
+        post.fileContent.endsWith(".pdf") ? (
+            <embed
+                src={`http://localhost:3001/uploads/${post.fileContent}`}
+                type="application/pdf"
+                width="100%"
+                height="200px"
+            />
+        ) : (
+            <img
+                src={`http://localhost:3001/uploads/${post.fileContent}`}
+                alt="Uploaded file"
+                className="file-thumbnail"
+                style={{ maxWidth: "200px", maxHeight: "200px" }}
+            />
+        )
+    );
+
     return (
         <div className="post-page-wrapper">
             <div className="post-page">
@@ -30,14 +48,15 @@ export default function PostPage() {
                 <h2 className="post-page-title">{post.postTitle || "Untitled"}</h2>
                 <div className="post-page-body">
                     <div className="post-page-right">
-                        {post.fileContent && (
+                        { filePreview || null }
+                        {/* {filePreview && (
                             <embed
                                 src={`http://localhost:3001/uploads/${post.fileContent}`}
                                 type="application/pdf"
                                 width="100%"
                                 height="400px"
                             />
-                        )}
+                        )} */}
                     </div> 
                     <div className={post.fileContent? "post-page-left" : "post-page-text-only"}>
                         <div className="post-page-user-info">

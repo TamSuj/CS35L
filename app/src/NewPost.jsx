@@ -63,7 +63,6 @@ export default function NewPost() {
     
             const data = await response.json();
             console.log("Post saved successfully!");
-            navigate("/")
             //alert("Post created successfully! Feel free to create another post or go back to the feed.");
             //console.log(data);
     
@@ -72,6 +71,7 @@ export default function NewPost() {
             setNoteText("");
             setFileUploads([]);
             setTag("");
+            navigate(`/post/${data.post._id}`);
         } catch (error) {
             console.error("Error saving post:", error);
             alert("Failed to save post.");

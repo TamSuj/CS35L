@@ -5,6 +5,24 @@ import { TagBar } from "./Tag.jsx";
 import LikeButton from "./LikeButton.jsx";
 
 export default function PostPopup({ post, onClose }) {
+    const filePreview = post.fileContent && (
+        post.fileContent.endsWith(".pdf") ? (
+            <embed
+                src={`http://localhost:3001/uploads/${post.fileContent}`}
+                type="application/pdf"
+                width="100%"
+                height="200px"
+            />
+        ) : (
+            <img
+                src={`http://localhost:3001/uploads/${post.fileContent}`}
+                alt="Uploaded file"
+                className="file-thumbnail"
+                style={{ maxWidth: "200px", maxHeight: "200px" }}
+            />
+        )
+    );
+
     return (
         <div className="popup-overlay" onClick={onClose}>
             <div className="popup-content" onClick={(e) => e.stopPropagation()}>
@@ -20,14 +38,15 @@ export default function PostPopup({ post, onClose }) {
                 <hr className="post-popup-hr"></hr>
                 <div className="post-popup-body">
                     <p>{post.textContent}</p>
-                    {post.fileContent && (
+                    {filePreview || null}
+                    {/* {post.fileContent && (
                         <embed
                             src={`http://localhost:3001/uploads/${post.fileContent}`}
                             type="application/pdf"
                             width="100%"
                             height="400px"
                         />
-                    )}
+                    )} */}
                     {/* <TagBar tagList={post.tags || []} /> */}
                     <TagBar tagList={post.tagObjects || []} showColor={true} />
                 </div>
